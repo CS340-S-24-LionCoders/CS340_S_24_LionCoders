@@ -1,1 +1,1 @@
-# CS340_S_24_MorseCoders
+# CS340_S_24_LionCoders
