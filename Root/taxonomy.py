@@ -1,16 +1,33 @@
 class taxonomy:
     def __init__(self):
-        self.t = []
+        self.taxonomicGroup = []
+        self.taxonomicSubgroup = [] = []
+        self.scientificName = []
+        self.commonName = []
     #
-    def addTaxonomy(self, taxonomy):
-        self.taxonomy.apprend(taxonomy)
+    def addTaxonomicGroup(self, group):
+        self.taxonomicGroup.append(group)
     #
-    def print(self):
-        return print(self.taxonomy)
+    def addTaxonomicSubgroup(self, subgroup):
+        self.taxonomicSubgroup.append(subgroup)
     #
-    x = 1
-    print(x)
-    x = taxonomy()
-    print(x)
+    def addScientificName(self, name):
+        self.scientificName.append(name)
+    #
+    def addCommonName(self, name):
+        self.commonName.append(name)
+    #
 #
-# chaning to test
+
+taxonomyNew = taxonomy()
+
+taxonomyNew.addTaxonomicGroup("Amphibians")
+taxonomyNew.addTaxonomicSubgroup("Frogs and Toads")
+taxonomyNew.addScientificName("Anaxyrus americanus")
+taxonomyNew.addCommonName("American Toad")
+
+print("Testing methods in class")
+print(taxonomyNew.taxonomicGroup)
+print(taxonomyNew.taxonomicSubgroup)
+print(taxonomyNew.scientificName)
+print(taxonomyNew.commonName)
