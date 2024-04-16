@@ -1,4 +1,4 @@
-class taxonomy:
+class organism:
     def __init__(self):
         self.category = []
         self.taxonomicGroup = []
