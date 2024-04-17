@@ -5,6 +5,15 @@ class organism:
         self.taxonomicSubgroup = [] = []
         self.scientificName = []
         self.commonName = []
+
+    #config dictionary 
+    config =  dict()
+
+    #query search function
+    def findCategory(self, userInput):
+        #this function will return either a table and or list of what the user ask for  
+        return userInput 
+
     #
     def addCategory(self, category):
         self.category.append(category)
