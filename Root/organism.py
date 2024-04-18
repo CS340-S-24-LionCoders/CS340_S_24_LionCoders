@@ -1,38 +1,100 @@
 import logging
+import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='Root\organism.log', encoding='utf-8', level=logging.DEBUG)
 
 class organism:
     def __init__(self):
-        self.category = ["Animal", "Plant"]
-        self.taxonomicGroup = ["Birds", "Amphibians"]
         self.taxonomicSubgroup = ["Frogs and Toads", "Blackbirds and Orioles"]
         self.scientificName = ["Sturnella magna", "Ambystoma laterale"]
         self.commonName = ["Bullfrog", "Wood Frog"]
+        self.category = ["Animal", "Plant"]
+        self.taxonomicGroup = ["Birds", "Amphibians"]
+    #
 
     #config dictionary 
     config =  dict()
-    
+
     def histogram():
         try:
             logger.info('Visualize data distributions in a histogram...')
+            try:
+                df = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',',index_col="Taxonomic Group")
+                try:
+                    
+                    logger.info('Getting frequency of taxonomic groups...')
+                    #freq_counts = df['Taxonomic Group'].value_counts()
+                    grouped_taxonmic = df.groupby('Taxonomic Group').value_counts()
+                    
+                    logger.info('Sorting frequency of taxonomic groups...')
+                    #freq_counts_sorted = grouped_taxonmic.sort_values()
+                    freq_counts_sorted = grouped_taxonmic.sort_index()
+
+                    plt.hist(freq_counts_sorted,bins=30,alpha = 0.45, color = 'red')
+                    plt.ylabel('Taxonomic Group Frequency')
+                    plt.xlabel('Taxonomic Groups')
+                    plt.title('Histogram of Yates Biodiversity')
+                    plt.show()
+                    plt.savefig('Root\Output\histogram.png')
+                    logger.info('Successfully histogram visualize.')
+                #
+                except:
+                    print("Not displaying histogram.")
+                    logger.debug('Not displaying histogram.')
+                #
+            #
+            except:
+                print("Not reading dataset.")
+                logger.debug('Not reading dataset.')
+            #
         #
         except:
             print('Histogram not working.')
             logger.debug('Histogram not working.')
         #
     #
+
     def linePlot():
         try:
             logger.info('Visualize data distributions in a line plot...')
+            try:
+                df = pd.read_csv('Root\Input\YatesBiodiversity.csv',index_col="Taxonomic Group")
+                try:
+                    freq_counts = df.index.value_counts() #gets the number of occurences of each Taxonomic Group 
+                    freq_counts_sorted = freq_counts.sort_index() #sorts by index 
+                    n = len(freq_counts)
+                    x = np.arange(1,n+1)
+                    y = freq_counts_sorted
+                    plt.plot(x, y)
+                    plt.title('Line Plot of Yates Biodiversity')
+                    plt.xlabel('Taxonomic Groups')
+                    plt.ylabel('Taxonomic Group Frequency')
+                    plt.savefig('Root\Output\linePlot.png', dpi=300)
+                    plt.show()
+                    plt.savefig('Root\Output\linePlot.png')
+                    logger.info('Completed line plot...')
+                #
+                except:
+                    print("Not displaying line plot.")
+                    logger.debug('Not displaying line plot.')
+                #
+            #
+            except:
+                print("Not reading dataset.")
+                logger.debug('Not reading dataset.')
+            #
         #
         except:
             print('Line plot not working.')
             logger.debug('Line plot not working.')
         #
     #
+        #
+    #
+
 
     #query search function
     def findCategory(self, userInput):
@@ -83,19 +145,6 @@ class organism:
     def addCommonName(self, name):
         self.commonName.append(name)
     #
+    histogram()
+    linePlot()
 #
-
-#Uncomment the code below to test
-
-#taxonomyNew = taxonomy()
-
-#taxonomyNew.addTaxonomicGroup("Amphibians")
-#taxonomyNew.addTaxonomicSubgroup("Frogs and Toads")
-#taxonomyNew.addScientificName("Anaxyrus americanus")
-#taxonomyNew.addCommonName("American Toad")
-
-#print("Testing methods in class")
-#print(taxonomyNew.taxonomicGroup)
-#print(taxonomyNew.taxonomicSubgroup)
-#print(taxonomyNew.scientificName)
-#print(taxonomyNew.commonName)
