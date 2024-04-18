@@ -24,17 +24,16 @@ class organism:
             try:
                 df = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',',index_col="Taxonomic Group")
                 try:
-                    # df['freq'] = df.groupby('Taxonomic Group')['Taxonomic Group'].transform('count')
                     
                     logger.info('Getting frequency of taxonomic groups...')
-                    freq_counts = df['Taxonomic Group'].value_counts()
-                    grouped_taxonmic = df.groupby('Taxonomic Group').count()
+                    #freq_counts = df['Taxonomic Group'].value_counts()
+                    grouped_taxonmic = df.groupby('Taxonomic Group').value_counts()
                     
                     logger.info('Sorting frequency of taxonomic groups...')
-                    freq_counts_sorted = grouped_taxonmic.sort_values()
+                    #freq_counts_sorted = grouped_taxonmic.sort_values()
+                    freq_counts_sorted = grouped_taxonmic.sort_index()
 
-                    plt.hist(freq_counts_sorted, bins=30, color='skyblue', edgecolor='black')
-
+                    plt.hist(freq_counts_sorted,bins=30,alpha = 0.45, color = 'red')
                     plt.ylabel('Taxonomic Group Frequency')
                     plt.xlabel('Taxonomic Groups')
                     plt.title('Histogram of Yates Biodiversity')
