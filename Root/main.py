@@ -10,20 +10,26 @@ def main():
     testOrganism = organism()
 
     #testing Visiual Distributions method
+    testOrganism.histogram()
+
     
+    #testing other class methods
     testOrganism.addTaxonomicGroup("Amphibians")
     testOrganism.addTaxonomicSubgroup("Frogs and Toads")
     testOrganism.addScientificName("Anaxyrus americanus")
     testOrganism.addCommonName("American Toad")
 
-    print("Testing methods in class")
+    #Testing class variables 
     print(testOrganism.taxonomicGroup)
     print(testOrganism.taxonomicSubgroup)
     print(testOrganism.scientificName)
     print(testOrganism.commonName)
 
-    print("Testing searching")
-    print(testOrganism.findCategory("category"))
+    #Testing searching 
+    print("Welcome to our Biodiversity By Country -Ditsribution of Animals, Plants, and Natural Communities System! Please select what group you will like to view more closely! ")
+    print("Options: category, taxonomicGroup, taxonomicSubgroup, scientificName, commonName ")
+    userInput = input("Enter what group you will like to view: ")
+    print(testOrganism.findCategory(userInput))
 
 
 
