@@ -18,16 +18,18 @@ class scientificCategory():
     #
     try:
         logger.info('Reading csv file and storing into a dataframe...')
-        dataframeCSV = pd.read_csv('Input\YatesBiodiversity.csv', index_col='county')
-        dataCSV = pd.DataFrame(dataframeCSV)
+        dataframeCSV = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',', index_col=0)
+        print(dataframeCSV)
+        logger.info('Reading csv file and storing into a dataframe successful!')
     except:
         print('Not loading csv file.')
         logger.debug('Not loading csv file.')
     #
     try:
         logger.info('Reading pickle file and storing into a dataframe...')
-        dafaframePickle = pd.read_pickle('Input\s', index_col='county')
+        dafaframePickle = pd.read_pickle('Root\Input\AlbanyBiodiversity.pkl',sep=',', index_col=0)
         dataPickle = pd.DataFrame(dafaframePickle)
+        logger.info('Reading pickle file and storing into a dataframe successful!')
     except:
         print('Not loading pickle file.')
         logger.debug('Not loading pickle file.')

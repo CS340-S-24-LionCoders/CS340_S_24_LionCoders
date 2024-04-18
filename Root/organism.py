@@ -16,16 +16,40 @@ class organism:
 
     #config dictionary 
     config =  dict()
-    
+
     def histogram():
         try:
             logger.info('Visualize data distributions in a histogram...')
+            try:
+                df = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',',index_col="Taxonomic Group")
+                try:
+                    freq_counts = df['Taxonomic Group'].value_counts()
+                    print(freq_counts)
+                    plt.hist(freq_counts, bins=300, edgecolor='k', linewidth=1)
+                    plt.ylabel('Taxonomic Group Frequency')
+                    plt.xlabel('Taxonomic Groups')
+                    plt.title('Histogram of Yates Biodiversity')
+                    plt.show()
+                    plt.savefig('Root\Output\histogram.png', dpi='figure', bbox_inches=None)
+                    
+                #
+                except:
+                    print("Not displaying histogram.")
+                    logger.debug('Not displaying histogram.')
+                #
+            #
+            except:
+                print("Not reading dataset.")
+                logger.debug('Not reading dataset.')
+            #
+            
         #
         except:
             print('Histogram not working.')
             logger.debug('Histogram not working.')
         #
     #
+
     def linePlot():
         try:
             logger.info('Visualize data distributions in a line plot...')
