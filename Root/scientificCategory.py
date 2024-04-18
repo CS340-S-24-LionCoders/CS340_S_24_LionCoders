@@ -28,7 +28,7 @@ class scientificCategory():
         try:
             logger.info('Reading pickle file and storing into a dataframe...')
             dafaframePickle = pd.read_pickle('Input\s', index_col='county')
-            dataCSV = pd.DataFrame(dafaframePickle)
+            dataPickle = pd.DataFrame(dafaframePickle)
         except:
             print('Not loading pickle file.')
             logger.debug('Not loading pickle file.')
