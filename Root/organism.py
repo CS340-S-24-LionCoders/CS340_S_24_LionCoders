@@ -22,9 +22,9 @@ class organism:
             try:
                 df = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',',index_col="Taxonomic Group")
                 try:
-                    sortDF = pd.DataFrame(df).sort_values(by=['Taxonomic Group'])
-                    print(sortDF)
-                    plt.hist(sortDF, bins=300, edgecolor='k', linewidth=1)
+                    freq_counts = df['Taxonomic Group'].value_counts()
+                    print(freq_counts)
+                    plt.hist(freq_counts, bins=300, edgecolor='k', linewidth=1)
                     plt.ylabel('Taxonomic Group Frequency')
                     plt.xlabel('Taxonomic Groups')
                     plt.title('Histogram of Yates Biodiversity')
