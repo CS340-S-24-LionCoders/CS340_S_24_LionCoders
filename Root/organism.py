@@ -9,9 +9,10 @@ class organism:
     def __init__(self):
         self.category = []
         self.taxonomicGroup = []
-        self.taxonomicSubgroup = [] = []
+        self.taxonomicSubgroup = []
         self.scientificName = []
         self.commonName = []
+    #
 
     #config dictionary 
     config =  dict()
@@ -22,15 +23,20 @@ class organism:
             try:
                 df = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',',index_col="Taxonomic Group")
                 try:
+                    group = df.groupby('Taxonomic Group').count()
+                    grouped_taxonmic = df.groupby('Taxonomic Group').count()
                     freq_counts = df['Taxonomic Group'].value_counts()
-                    print(freq_counts)
-                    plt.hist(freq_counts, bins=300, edgecolor='k', linewidth=1)
+                    
+                    df['Taxonomic Group'] = df.groupby('Taxonomic Group')['Taxonomic Group'].transform('count')
+                    
+                    plt.hist(grouped_taxonmic, bins=0, edgecolor='k', linewidth=1)
+                             #('Flowering Plants','Mosses','Amphibians','Animal Assemblages','Beetles','Birds', 'Butterflies and Moths','Ferns and Fern Allies','Fish','Freshwater Nontidal Wetlands','Mammals','Other Animals','Reptiles')
                     plt.ylabel('Taxonomic Group Frequency')
                     plt.xlabel('Taxonomic Groups')
                     plt.title('Histogram of Yates Biodiversity')
                     plt.show()
                     plt.savefig('Root\Output\histogram.png', dpi='figure', bbox_inches=None)
-                    
+                    logger.info('Successfully histogram visualize.')
                 #
                 except:
                     print("Not displaying histogram.")
@@ -41,7 +47,6 @@ class organism:
                 print("Not reading dataset.")
                 logger.debug('Not reading dataset.')
             #
-            
         #
         except:
             print('Histogram not working.')
