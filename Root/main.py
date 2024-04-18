@@ -5,8 +5,12 @@ def main():
     print("Hello, World!")
 
     #test code 
+
+    #call parent class
     testOrganism = organism()
 
+    #testing Visiual Distributions method
+    
     testOrganism.addTaxonomicGroup("Amphibians")
     testOrganism.addTaxonomicSubgroup("Frogs and Toads")
     testOrganism.addScientificName("Anaxyrus americanus")
