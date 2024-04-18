@@ -1,4 +1,6 @@
 import logging
+import matplotlib.pyplot as plt
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='Root\organism.log', encoding='utf-8', level=logging.DEBUG)
@@ -13,19 +15,50 @@ class organism:
 
     #config dictionary 
     config =  dict()
-    
+
     def histogram():
         try:
             logger.info('Visualize data distributions in a histogram...')
+            try:
+                df = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',',index_col="Taxonomic Group")
+                try:
+                    sortDF = pd.DataFrame(df).sort_values(by=['Taxonomic Group'])
+                    print(sortDF)
+                    plt.hist(sortDF, bins=300, edgecolor='k', linewidth=1)
+                    plt.ylabel('Taxonomic Group Frequency')
+                    plt.xlabel('Taxonomic Groups')
+                    plt.title('Histogram of Yates Biodiversity')
+                    plt.show()
+                    plt.savefig('Root\Output\histogram.png', dpi='figure', bbox_inches=None)
+                    
+                #
+                except:
+                    print("Not displaying histogram.")
+                    logger.debug('Not displaying histogram.')
+                #
+            #
+            except:
+                print("Not reading dataset.")
+                logger.debug('Not reading dataset.')
+            #
+            
         #
         except:
             print('Histogram not working.')
             logger.debug('Histogram not working.')
         #
     #
+
     def linePlot():
         try:
             logger.info('Visualize data distributions in a line plot...')
+            plt.plot(x, y)
+            plt.title('Line Plot of Yates Biodiversity')
+            plt.xlabel('Taxonomic Groups')
+            plt.ylabel('Taxonomic Group Frequency')
+            plt.show()
+            logger.info('Completed line plot...')
+
         #
         except:
             print('Line plot not working.')
@@ -61,6 +94,7 @@ class organism:
     def addCommonName(self, name):
         self.commonName.append(name)
     #
+    histogram()
 #
 
 #Uncomment the code below to test
