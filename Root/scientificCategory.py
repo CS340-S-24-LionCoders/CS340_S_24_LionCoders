@@ -17,26 +17,20 @@ class scientificCategory():
         self.config = ()
     #
     try:
-        try:
-            logger.info('Reading csv file and storing into a dataframe...')
-            dataframeCSV = pd.read_csv('Input\YatesBiodiversity.csv', index_col='county')
-            dataCSV = pd.DataFrame(dataframeCSV)
-        except:
-            print('Not loading csv file.')
-            logger.debug('Not loading csv file.')
-        #
-        try:
-            logger.info('Reading pickle file and storing into a dataframe...')
-            dafaframePickle = pd.read_pickle('Input\s', index_col='county')
-            dataPickle = pd.DataFrame(dafaframePickle)
-        except:
-            print('Not loading pickle file.')
-            logger.debug('Not loading pickle file.')
-        #
-    #
+        logger.info('Reading csv file and storing into a dataframe...')
+        dataframeCSV = pd.read_csv('Input\YatesBiodiversity.csv', index_col='county')
+        dataCSV = pd.DataFrame(dataframeCSV)
     except:
-        print('Not loading csv nor pickle file.')
-        logger.debug('Not loading csv nor pickle file.')
+        print('Not loading csv file.')
+        logger.debug('Not loading csv file.')
+    #
+    try:
+        logger.info('Reading pickle file and storing into a dataframe...')
+        dafaframePickle = pd.read_pickle('Input\s', index_col='county')
+        dataPickle = pd.DataFrame(dafaframePickle)
+    except:
+        print('Not loading pickle file.')
+        logger.debug('Not loading pickle file.')
     #
     
     def violinPlot(data):
