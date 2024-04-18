@@ -1,5 +1,7 @@
 import logging
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='Root\organism.log', encoding='utf-8', level=logging.DEBUG)
@@ -27,10 +29,37 @@ class organism:
     def linePlot():
         try:
             logger.info('Visualize data distributions in a line plot...')
+            try:
+                df = pd.read_csv('Root\Input\YatesBiodiversity.csv',index_col="Taxonomic Group")
+                try:
+                    freq_counts = df.index.value_counts() #gets the number of occurences of each Taxonomic Group 
+                    freq_counts_sorted = freq_counts.sort_index() #sorts by index 
+                    n = len(freq_counts)
+                    x = np.arange(1,n+1)
+                    y = freq_counts_sorted
+                    plt.plot(x, y)
+                    plt.title('Line Plot of Yates Biodiversity')
+                    plt.xlabel('Taxonomic Groups')
+                    plt.ylabel('Taxonomic Group Frequency')
+                    plt.savefig('Root\Output\linePlot.png', dpi=300)
+                    plt.show()
+                    logger.info('Completed line plot...')
+                #
+                except:
+                    print("Not displaying line plot.")
+                    logger.debug('Not displaying line plot.')
+                #
+            #
+            except:
+                print("Not reading dataset.")
+                logger.debug('Not reading dataset.')
+            #
         #
         except:
             print('Line plot not working.')
             logger.debug('Line plot not working.')
+        #
+    #
         #
     #
 
@@ -84,18 +113,3 @@ class organism:
         self.commonName.append(name)
     #
 #
-
-#Uncomment the code below to test
-
-#taxonomyNew = taxonomy()
-
-#taxonomyNew.addTaxonomicGroup("Amphibians")
-#taxonomyNew.addTaxonomicSubgroup("Frogs and Toads")
-#taxonomyNew.addScientificName("Anaxyrus americanus")
-#taxonomyNew.addCommonName("American Toad")
-
-#print("Testing methods in class")
-#print(taxonomyNew.taxonomicGroup)
-#print(taxonomyNew.taxonomicSubgroup)
-#print(taxonomyNew.scientificName)
-#print(taxonomyNew.commonName)
