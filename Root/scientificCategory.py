@@ -4,7 +4,7 @@ import seaborn
 import logging
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename='fileLog.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='Root\scientificCategory.log', encoding='utf-8', level=logging.DEBUG)
 
 class scientificCategory():
     def __init__(self, config):
