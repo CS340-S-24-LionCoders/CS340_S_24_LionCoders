@@ -23,10 +23,10 @@ class organism:
             try:
                 df = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',',index_col="Taxonomic Group")
                 try:
-                    group = df.groupby('Taxonomic Group').count()
+                    df['freq'] = df.groupby('Taxonomic Group')['Taxonomic Group'].transform('count')
                     grouped_taxonmic = df.groupby('Taxonomic Group').count()
                     freq_counts = df['Taxonomic Group'].value_counts()
-                    
+                    print(freq_counts)
                     df['Taxonomic Group'] = df.groupby('Taxonomic Group')['Taxonomic Group'].transform('count')
                     
                     plt.hist(grouped_taxonmic, bins=0, edgecolor='k', linewidth=1)
