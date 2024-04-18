@@ -1,19 +1,27 @@
+from organism import organism
+
+
 def main():
     print("Hello, World!")
 
     #test code 
-    taxonomyNew = taxonomy()
+    testOrganism = organism()
 
-    taxonomyNew.addTaxonomicGroup("Amphibians")
-    taxonomyNew.addTaxonomicSubgroup("Frogs and Toads")
-    taxonomyNew.addScientificName("Anaxyrus americanus")
-    taxonomyNew.addCommonName("American Toad")
+    testOrganism.addTaxonomicGroup("Amphibians")
+    testOrganism.addTaxonomicSubgroup("Frogs and Toads")
+    testOrganism.addScientificName("Anaxyrus americanus")
+    testOrganism.addCommonName("American Toad")
 
     print("Testing methods in class")
-    print(taxonomyNew.taxonomicGroup)
-    print(taxonomyNew.taxonomicSubgroup)
-    print(taxonomyNew.scientificName)
-    print(taxonomyNew.commonName)
+    print(testOrganism.taxonomicGroup)
+    print(testOrganism.taxonomicSubgroup)
+    print(testOrganism.scientificName)
+    print(testOrganism.commonName)
+
+    print("Testing searching")
+    print(testOrganism.findCategory("category"))
+
+
 
 
 
