@@ -1,18 +1,19 @@
 import logging
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='Root\organism.log', encoding='utf-8', level=logging.DEBUG)
 
 class organism:
     def __init__(self):
-        self.category = ["Animal", "Plant"]
-        self.taxonomicGroup = ["Birds", "Amphibians"]
         self.taxonomicSubgroup = ["Frogs and Toads", "Blackbirds and Orioles"]
         self.scientificName = ["Sturnella magna", "Ambystoma laterale"]
         self.commonName = ["Bullfrog", "Wood Frog"]
+        self.category = ["Animal", "Plant"]
+        self.taxonomicGroup = ["Birds", "Amphibians"]
+    #
 
     #config dictionary 
     config =  dict()
@@ -23,15 +24,22 @@ class organism:
             try:
                 df = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',',index_col="Taxonomic Group")
                 try:
-                    freq_counts = df['Taxonomic Group'].value_counts()
-                    print(freq_counts)
-                    plt.hist(freq_counts, bins=300, edgecolor='k', linewidth=1)
+                    
+                    logger.info('Getting frequency of taxonomic groups...')
+                    #freq_counts = df['Taxonomic Group'].value_counts()
+                    grouped_taxonmic = df.groupby('Taxonomic Group').value_counts()
+                    
+                    logger.info('Sorting frequency of taxonomic groups...')
+                    #freq_counts_sorted = grouped_taxonmic.sort_values()
+                    freq_counts_sorted = grouped_taxonmic.sort_index()
+
+                    plt.hist(freq_counts_sorted,bins=30,alpha = 0.45, color = 'red')
                     plt.ylabel('Taxonomic Group Frequency')
                     plt.xlabel('Taxonomic Groups')
                     plt.title('Histogram of Yates Biodiversity')
                     plt.show()
-                    plt.savefig('Root\Output\histogram.png', dpi='figure', bbox_inches=None)
-                    
+                    plt.savefig('Root\Output\histogram.png')
+                    logger.info('Successfully histogram visualize.')
                 #
                 except:
                     print("Not displaying histogram.")
@@ -42,7 +50,6 @@ class organism:
                 print("Not reading dataset.")
                 logger.debug('Not reading dataset.')
             #
-            
         #
         except:
             print('Histogram not working.')
@@ -67,6 +74,7 @@ class organism:
                     plt.ylabel('Taxonomic Group Frequency')
                     plt.savefig('Root\Output\linePlot.png', dpi=300)
                     plt.show()
+                    plt.savefig('Root\Output\linePlot.png')
                     logger.info('Completed line plot...')
                 #
                 except:
@@ -86,6 +94,7 @@ class organism:
     #
         #
     #
+
 
     #query search function
     def findCategory(self, userInput):
@@ -136,4 +145,6 @@ class organism:
     def addCommonName(self, name):
         self.commonName.append(name)
     #
+    histogram()
+    linePlot()
 #
