@@ -5,7 +5,7 @@ import logging
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='fileLog.log', encoding='utf-8', level=logging.DEBUG)
 
-class scientificCategory(organisim):
+class scientificCategory(organism):
     def __init__(self, config):
         super(config)
         self.category = []
@@ -15,6 +15,7 @@ class scientificCategory(organisim):
         self.commonName = []
         self.config = ()
     #
+    
 	logger.info('Reading csv file and storing into a dataframe...')
     df = pd.read_csv('Input\Biodiversity_by_County_-_Distribution_of_Animals_Plants_and_Natural_Communities.csv', index_col='county')
     data = pd.DataFrame(df)
