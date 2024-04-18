@@ -1,6 +1,7 @@
 import logging
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='Root\organism.log', encoding='utf-8', level=logging.DEBUG)
@@ -23,19 +24,22 @@ class organism:
             try:
                 df = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',',index_col="Taxonomic Group")
                 try:
-                    df['freq'] = df.groupby('Taxonomic Group')['Taxonomic Group'].transform('count')
-                    grouped_taxonmic = df.groupby('Taxonomic Group').count()
-                    freq_counts = df['Taxonomic Group'].value_counts()
-                    print(freq_counts)
-                    df['Taxonomic Group'] = df.groupby('Taxonomic Group')['Taxonomic Group'].transform('count')
+                    # df['freq'] = df.groupby('Taxonomic Group')['Taxonomic Group'].transform('count')
                     
-                    plt.hist(grouped_taxonmic, bins=0, edgecolor='k', linewidth=1)
-                             #('Flowering Plants','Mosses','Amphibians','Animal Assemblages','Beetles','Birds', 'Butterflies and Moths','Ferns and Fern Allies','Fish','Freshwater Nontidal Wetlands','Mammals','Other Animals','Reptiles')
+                    logger.info('Getting frequency of taxonomic groups...')
+                    freq_counts = df['Taxonomic Group'].value_counts()
+                    grouped_taxonmic = df.groupby('Taxonomic Group').count()
+                    
+                    logger.info('Sorting frequency of taxonomic groups...')
+                    freq_counts_sorted = grouped_taxonmic.sort_values()
+
+                    plt.hist(freq_counts_sorted, bins=30, color='skyblue', edgecolor='black')
+
                     plt.ylabel('Taxonomic Group Frequency')
                     plt.xlabel('Taxonomic Groups')
                     plt.title('Histogram of Yates Biodiversity')
                     plt.show()
-                    plt.savefig('Root\Output\histogram.png', dpi='figure', bbox_inches=None)
+                    plt.savefig('Root\Output\histogram.png')
                     logger.info('Successfully histogram visualize.')
                 #
                 except:
@@ -57,19 +61,39 @@ class organism:
     def linePlot():
         try:
             logger.info('Visualize data distributions in a line plot...')
-            plt.plot(x, y)
-            plt.title('Line Plot of Yates Biodiversity')
-            plt.xlabel('Taxonomic Groups')
-            plt.ylabel('Taxonomic Group Frequency')
-            plt.show()
-            logger.info('Completed line plot...')
-
+            try:
+                df = pd.read_csv('Root\Input\YatesBiodiversity.csv',index_col="Taxonomic Group")
+                try:
+                    freq_counts = df.index.value_counts() #gets the number of occurences of each Taxonomic Group 
+                    freq_counts_sorted = freq_counts.sort_index() #sorts by index 
+                    n = len(freq_counts)
+                    x = np.arange(1,n+1)
+                    y = freq_counts_sorted
+                    plt.plot(x, y)
+                    plt.title('Line Plot of Yates Biodiversity')
+                    plt.xlabel('Taxonomic Groups')
+                    plt.ylabel('Taxonomic Group Frequency')
+                    plt.savefig('Root\Output\linePlot.png', dpi=300)
+                    plt.show()
+                    plt.savefig('Root\Output\linePlot.png')
+                    logger.info('Completed line plot...')
+                #
+                except:
+                    print("Not displaying line plot.")
+                    logger.debug('Not displaying line plot.')
+                #
+            #
+            except:
+                print("Not reading dataset.")
+                logger.debug('Not reading dataset.')
+            #
         #
         except:
             print('Line plot not working.')
             logger.debug('Line plot not working.')
         #
     #
+
 
     #query search function
     def findCategory(self, userInput):
@@ -121,6 +145,7 @@ class organism:
         self.commonName.append(name)
     #
     histogram()
+    linePlot()
 #
 
 #Uncomment the code below to test
