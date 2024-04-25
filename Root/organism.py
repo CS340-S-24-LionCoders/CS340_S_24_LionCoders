@@ -26,12 +26,9 @@ class organism:
                 try:
 
                     logger.info('Getting frequency of taxonomic groups...')
-                    #freq_counts = df['Taxonomic Group'].value_counts()
-                    #grouped_taxonmic = df.groupby('Taxonomic Group').value_counts()
                     grouped_taxonmic = df.index.value_counts()
 
                     logger.info('Sorting frequency of taxonomic groups...')
-                    #freq_counts_sorted = grouped_taxonmic.sort_values()
                     freq_counts_sorted = grouped_taxonmic.sort_index()
 
                     plt.hist(freq_counts_sorted,bins=30,alpha = 0.45, color = 'red')
@@ -40,6 +37,7 @@ class organism:
                     plt.title('Histogram of Yates Biodiversity')
                     plt.savefig('Root\Output\histogram.png')
                     plt.show()
+
                     logger.info('Successfully histogram visualize.')
                 #
                 except:
@@ -73,9 +71,8 @@ class organism:
                     plt.title('Line Plot of Yates Biodiversity')
                     plt.xlabel('Taxonomic Groups')
                     plt.ylabel('Taxonomic Group Frequency')
-                    plt.savefig('Root\Output\linePlot.png', dpi=300)
-                    plt.show()
                     plt.savefig('Root\Output\linePlot.png')
+                    plt.show()
                     logger.info('Completed line plot...')
                 #
                 except:
@@ -131,21 +128,7 @@ class organism:
         #
 
     #
-    def addCategory(self, category):
-        self.category.append(category)
-    #
-    def addTaxonomicGroup(self, group):
-        self.taxonomicGroup.append(group)
-    #
-    def addTaxonomicSubgroup(self, subgroup):
-        self.taxonomicSubgroup.append(subgroup)
-    #
-    def addScientificName(self, name):
-        self.scientificName.append(name)
-    #
-    def addCommonName(self, name):
-        self.commonName.append(name)
-    #
+
     histogram()
     linePlot()
 #
