@@ -48,18 +48,33 @@ class scientificCategory():
         #
     #
  
-    def whiskerBoxPlot(data): 
+    def whiskerBoxPlot(): 
         try:
             logger.info('Displaying data as whisker-box plot...')
-            sns.boxplot(data=data, notch=True, sym='b+', orient='vertical', whis=1.5)
+            sciCat = pd.read_csv('Root\Input\data.csv', index_col="Taxonomic Subgroup")
+            # Drop rows with missing values (NaNs)
+            sciCat.dropna(inplace=True)
+            
+            # Convert data to numeric type (if necessary)
+            sciCat = sciCat.apply(pd.to_numeric, errors='coerce')
+            
+            # Check if data is empty after dropping NaNs
+            if sciCat.empty:
+                raise ValueError("DataFrame is empty after dropping NaNs")
+            #
+            plt.gca().tick_params(axis='x', labelsize=4) # Adjust font size of tick labels on x-axis
+            plt.xticks(rotation=90)
+            # Visualize data
+            sns.boxplot(data=sciCat, notch=True, sym='b+', orient='vertical', whis=1.5)
             plt.xlabel("Category")
             plt.ylabel("Values")
-            plt.title("Box-and-Whisker Plot (Seaborn)")
+            plt.title("Box-and-Whisker Plot")
+            plt.savefig('Root\Output\whiskerBoxPlot.png')
             plt.show()
         #
-        except:
-            print('Whisker-box plot not working.')
-            logger.debug('Whisker-box plot not working.')
+        except Exception as e:
+            print('Error occurred while creating whisker-box plot:', e)
+            logger.error('Error occurred while creating whisker-box plot: %s', e)
         #
 	#
  
@@ -248,5 +263,5 @@ class scientificCategory():
             logger.debug('Not querying search function.')
         #
 	#
-    scatterPlot()
+    whiskerBoxPlot()
 #
