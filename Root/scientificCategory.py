@@ -101,11 +101,22 @@ class scientificCategory():
     
     #calculations section 
     
-    def calculateJointCounts(self,holder):
+    def calculateJointCounts():
         try:
             logger.info('Calculating the joint counts...')
-            ##will calculate joint counts and return result
-            return holder
+            # Read the data from the CSV file
+            df = pd.read_csv('Root\Input\data.csv', sep=',', index_col=0)
+
+            grouped = df.groupby(['Taxonomic Subgroup', 'Taxonomic Group']).size().reset_index(name='Count')
+            grouped = grouped.rename_axis("Joint Count Index")
+            # Create a bar plot
+            plt.figure(figsize=(10, 6))
+            plt.bar(grouped.index, grouped['Count'])
+            plt.xlabel('Taxonomic Combinations')
+            plt.ylabel('Count')
+            plt.title('Joint Counts for Taxonomic Combinations')
+            plt.tight_layout()
+            plt.show()
         #
         except:
             print('Not calculating the joint counts.')
@@ -138,7 +149,8 @@ class scientificCategory():
             subgroup = len(df['Taxonomic Subgroup'].unique())
             plt.gcf().set_size_inches(subgroup * 0.5, 6)
             
-            plt.gca().tick_params(axis='x', labelsize=3) # Adjust font size of tick labels on x-axis
+            plt.gca().tick_params(axis='x', labelsize=8) # Adjust font size of tick labels on x-axis
+            plt.xticks(rotation=90)
 
             plt.savefig('Root\Output\jointProbabilities.png')  # Save the plot as an image
             plt.show()
@@ -233,5 +245,5 @@ class scientificCategory():
             logger.debug('Not querying search function.')
         #
 	#
-    calculateJointProbabilities() 
+    calculateJointCounts()
 #
