@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib as plt
+import numpy as np
 import seaborn
 import logging
 
@@ -19,7 +20,6 @@ class scientificCategory():
     try:
         logger.info('Reading csv file and storing into a dataframe...')
         dataframeCSV = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',', index_col=0)
-        print(dataframeCSV)
         logger.info('Reading csv file and storing into a dataframe successful!')
     except:
         print('Not loading csv file.')
@@ -48,10 +48,14 @@ class scientificCategory():
         #
     #
  
-    def whiskerBoxPlot(dataset):
+    def whiskerBoxPlot():
+        data = [10, 15, 20, 25, 30, 35, 40]
         try:
             logger.info('Displaying data as whisker-box plot...')
-            plt.boxplot(dataset)
+            seaborn.boxplot(data=data, notch=True, sym='b+', orient='vertical', whis=1.5)
+            plt.xlabel("Category")
+            plt.ylabel("Values")
+            plt.title("Box-and-Whisker Plot (Seaborn)")
             plt.show()
         #
         except:
@@ -59,12 +63,37 @@ class scientificCategory():
             logger.debug('Whisker-box plot not working.')
         #
 	#
+    
  
-    def scatterPlot(x,y):
+    def scatterPlot():
         try:
-            logger.info('Displaying data as scatter plot...')
-            plt.scatter(x,y)
-            plt.show()
+            logger.info('Visualize data distributions in a scatter plot...')
+            try:
+                sciCat = pd.read_csv('Root\Input\YatesBiodiversity.csv', index_col="Scientific Category")
+                try:
+                    freq_counts = sciCat.index.value_counts() 
+                    freq_counts_sorted = freq_counts.sort_index() 
+                    n = len(freq_counts)
+                    x = np.arange(1,n+1)
+                    y = freq_counts_sorted
+                    plt.scatter(x, y)
+                    plt.title('Scatter Plot of Yates Biodiversity')
+                    plt.xlabel('Scientific Category')
+                    plt.ylabel('Scientific Category Frequency')
+                    plt.savefig('Root\Output\scatterPlot.png', dpi=300)
+                    plt.show()
+                    plt.savefig('Root\Output\scatterPlot.png')
+                    logger.info('Completed scatter plot...')
+                #
+                except:
+                    print("Not displaying scatter plot.")
+                    logger.debug('Not displaying scatter plot.')
+                #
+            #
+            except:
+                print("Not reading dataset.")
+                logger.debug('Not reading dataset.')
+            #
         #
         except:
             print('Scatter plot not working.')
@@ -85,30 +114,22 @@ class scientificCategory():
             logger.debug('Not calculating the joint counts.')
         #
 	#
-    
-    def calculateJointCounts(self, holder):
-        try:
-            logger.info('Calculating the joint counts...')
-            ##will calculate joint counts and return result
-            return holder 
-        #
-        except:
-            print('Not calculating the joint counts.')
-            logger.debug('Not calculating the joint counts.')
-        #
-    #
-    
-    def calculateJointProbabilities(self, holder):
+
+    def calculateJointProbabilities():
         try:
             logger.info('Calculating the joint probabilities...')
-            ##will calculate joint probabilities and return result
-            return holder
+            A = np.random.normal(size=100)
+            B = np.random.normal(size=100)
+            df = pd.DataFrame({'A': A, 'B': B})
+            s = seaborn.jointplot(data = df, x ='A', y='B',kind="scatter", height=6, ratio=5)
+            s.show()
         #
         except:
             print('Not calculating the joint probabilities.')
             logger.debug('Not calculating the joint probabilities.')
         #
 	#
+    
     
     def calculateConditionalProbabilities(self, holder):
         try:
@@ -122,39 +143,26 @@ class scientificCategory():
         #
     #
     
-    def calculateMean(self, holder):
+    def calculations():
         try:
-            logger.info('Calculating the mean...')
-            ##will calculate mean and return result
-            return holder
+            sciCat = pd.read_csv('Root\Input\YatesBiodiversity.csv',index_col="Scientific Category")
+            try: 
+                print("The mean is: ")
+                print(sciCat.mean())
+
+                print("The median is: ")
+                print(sciCat.median())
+
+                print("The standard deviation is ")
+                print(sciCat.std())
+
+            except:
+                print('Caluculating mean, median, and standard deviation is not working.')
+                logger.debug('Caluculating mean, median, and standard deviation is not working.')
         #
         except:
-            print('Not calculating the mean.')
-            logger.debug('Not calculating the mean.')
-        #
-    #
-    
-    def calculateMedian(self, holder):
-        try:
-            logger.info('Calculating the median...')
-            ##will calculate median and return result
-            return holder
-        #
-        except:
-            print('Not calculating the median.')
-            logger.debug('Not calculating the median.')
-        #
-    #
-    
-    def calculateSTD(self, holder):
-        try:
-            logger.info('Calculating the standard deviation...')
-            ##will calculate STD and return result
-            return holder 
-        #
-        except:
-            print('Not calculating the standard deviation.')
-            logger.debug('Not calculating the standard deviation.')
+            print("Not reading dataset.")
+            logger.debug('Not reading dataset.')
         #
     #
 
@@ -207,4 +215,8 @@ class scientificCategory():
             logger.debug('Not querying search function.')
         #
 	#
+    scatterPlot()
+    calculations()
+    calculateJointProbabilities()  
+    whiskerBoxPlot()
 #
