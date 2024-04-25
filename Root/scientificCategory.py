@@ -81,10 +81,9 @@ class scientificCategory():
         try:
             logger.info('Visualize data distributions in a scatter plot...')
             try:
-                sciCat = pd.read_csv('Root\Input\data.csv', index_col="Taxonomic Subgroup")
                 try:
                     # Calculate frequency counts of scientific categories
-                    freq_counts = sciCat.index.value_counts() 
+                    freq_counts = data["Taxonomic Subgroup"].index.value_counts() 
                     freq_counts_sorted = freq_counts.sort_index() 
                     n = len(freq_counts)
                     x = np.arange(1,n+1)
@@ -118,13 +117,10 @@ class scientificCategory():
     
     #calculations section 
     
-    def calculateJointCounts():
+    def calculateJointCounts(df,a,b):
         try:
             logger.info('Calculating the joint counts...')
-            # Read the data from the CSV file
-            df = pd.read_csv('Root\Input\data.csv', sep=',', index_col=0)
-
-            grouped = df.groupby(['Taxonomic Subgroup', 'Taxonomic Group']).size().reset_index(name='Count')
+            grouped = df.groupby([a, b]).size().reset_index(name='Count')
             grouped = grouped.rename_axis("Joint Count Index")
             # Create a bar plot
             plt.figure(figsize=(10, 6))
@@ -141,14 +137,11 @@ class scientificCategory():
         #
 	#
 
-    def calculateJointProbabilities():
+    def calculateJointProbabilities(df, a, b):
         try:
             logger.info('Calculating the joint probabilities...')
-            # Read the data from the CSV file
-            df = pd.read_csv('Root\Input\data.csv', sep=',', index_col=0)
-            
             # Group by Subgroup and Taxonomic Group, then count occurrences
-            grouped = df.groupby(['Taxonomic Subgroup', 'Taxonomic Group']).size().reset_index(name='Count')
+            grouped = df.groupby([a, b]).size().reset_index(name='Count')
             
             # Normalize counts to get proportions
             grouped['Proportion'] = grouped.groupby('Taxonomic Subgroup')['Count'].transform(lambda x: x / x.sum())
@@ -262,6 +255,6 @@ class scientificCategory():
             logger.debug('Not querying search function.')
         #
 	#
-    whiskerBoxPlot(dataframeCSV)
-    
+    x = calculateConditionalProbabilities(dataframeCSV, 'Taxonomic Subgroup', 'Taxonomic Group')
+    print(x)
 #
