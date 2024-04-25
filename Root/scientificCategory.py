@@ -67,20 +67,23 @@ class scientificCategory():
         try:
             logger.info('Visualize data distributions in a scatter plot...')
             try:
-                sciCat = pd.read_csv('Root\Input\YatesBiodiversity.csv', index_col="Scientific Category")
+                sciCat = pd.read_csv('Root\Input\data.csv', index_col="Taxonomic Subgroup")
                 try:
+                    # Calculate frequency counts of scientific categories
                     freq_counts = sciCat.index.value_counts() 
                     freq_counts_sorted = freq_counts.sort_index() 
                     n = len(freq_counts)
                     x = np.arange(1,n+1)
                     y = freq_counts_sorted
+                    
+                    # Visual dataset
                     plt.scatter(x, y)
-                    plt.title('Scatter Plot of Yates Biodiversity')
-                    plt.xlabel('Scientific Category')
-                    plt.ylabel('Scientific Category Frequency')
-                    plt.savefig('Root\Output\scatterPlot.png', dpi=300)
-                    plt.show()
+                    plt.title('Scatter Plot of Yates Taxonomic Subgroup Biodiversity')
+                    plt.xlabel('Taxonomic Subgroup')
+                    plt.ylabel('Taxonomic Subgroup Frequency')
                     plt.savefig('Root\Output\scatterPlot.png')
+                    plt.show()
+
                     logger.info('Completed scatter plot...')
                 #
                 except:
@@ -245,5 +248,5 @@ class scientificCategory():
             logger.debug('Not querying search function.')
         #
 	#
-    calculateJointCounts()
+    scatterPlot()
 #
