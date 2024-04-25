@@ -24,11 +24,12 @@ class organism:
             try:
                 df = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',',index_col="Taxonomic Group")
                 try:
-                    
+
                     logger.info('Getting frequency of taxonomic groups...')
                     #freq_counts = df['Taxonomic Group'].value_counts()
-                    grouped_taxonmic = df.groupby('Taxonomic Group').value_counts()
-                    
+                    #grouped_taxonmic = df.groupby('Taxonomic Group').value_counts()
+                    grouped_taxonmic = df.index.value_counts()
+
                     logger.info('Sorting frequency of taxonomic groups...')
                     #freq_counts_sorted = grouped_taxonmic.sort_values()
                     freq_counts_sorted = grouped_taxonmic.sort_index()
@@ -37,8 +38,8 @@ class organism:
                     plt.ylabel('Taxonomic Group Frequency')
                     plt.xlabel('Taxonomic Groups')
                     plt.title('Histogram of Yates Biodiversity')
-                    plt.show()
                     plt.savefig('Root\Output\histogram.png')
+                    plt.show()
                     logger.info('Successfully histogram visualize.')
                 #
                 except:
