@@ -48,8 +48,7 @@ class scientificCategory():
         #
     #
  
-    def whiskerBoxPlot():
-        data = [10, 15, 20, 25, 30, 35, 40]
+    def whiskerBoxPlot(data): 
         try:
             logger.info('Displaying data as whisker-box plot...')
             seaborn.boxplot(data=data, notch=True, sym='b+', orient='vertical', whis=1.5)
@@ -91,8 +90,8 @@ class scientificCategory():
                 #
             #
             except:
-                print("Not reading dataset.")
-                logger.debug('Not reading dataset.')
+                print("Not reading dataset for scatter plot.")
+                logger.debug('Not reading dataset for scatter plot.')
             #
         #
         except:
@@ -115,7 +114,7 @@ class scientificCategory():
         #
 	#
 
-    def calculateJointProbabilities():
+    def calculateJointProbabilities(): # MY BIT
         try:
             logger.info('Calculating the joint probabilities...')
             A = np.random.normal(size=100)
