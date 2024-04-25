@@ -14,7 +14,6 @@ def main():
     print("\t\t3) Find a specific Catergory, Taxonomic Group, Taxonomic Subgroup, Scientific Name, or Common Name in the dataset")
     print("\t\t4) Exit the program.")
     inTheSystem = True
-    df = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',',index_col="Taxonomic Group")
 
     while inTheSystem:
         userTask = input("Please choice your task: ")
