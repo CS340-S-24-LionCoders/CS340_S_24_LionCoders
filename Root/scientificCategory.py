@@ -1,8 +1,8 @@
-import pandas as pd
-import matplotlib as plt
-import numpy as np
-import seaborn
 import logging
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='Root\scientificCategory.log', encoding='utf-8', level=logging.DEBUG)
@@ -19,7 +19,7 @@ class scientificCategory():
     #
     try:
         logger.info('Reading csv file and storing into a dataframe...')
-        dataframeCSV = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',', index_col=0)
+        dataframeCSV = pd.read_csv('Root\Input\data.csv',sep=',', index_col=0)
         logger.info('Reading csv file and storing into a dataframe successful!')
     except:
         print('Not loading csv file.')
@@ -38,8 +38,8 @@ class scientificCategory():
     def violinPlot(data):
         try:
             logger.info('Displaying data as violin plot...')
-            seaborn.set(style='whitegrid')
-            dataset = seaborn.load_dataset(data)
+            sns.set(style='whitegrid')
+            dataset = sns.load_dataset(data)
             #seaborn.violinplot(x="an x-axis value" , y = "an y-axis value" data=dataset) //something is wrong with this line
         #
         except:
@@ -51,7 +51,7 @@ class scientificCategory():
     def whiskerBoxPlot(data): 
         try:
             logger.info('Displaying data as whisker-box plot...')
-            seaborn.boxplot(data=data, notch=True, sym='b+', orient='vertical', whis=1.5)
+            sns.boxplot(data=data, notch=True, sym='b+', orient='vertical', whis=1.5)
             plt.xlabel("Category")
             plt.ylabel("Values")
             plt.title("Box-and-Whisker Plot (Seaborn)")
@@ -62,7 +62,6 @@ class scientificCategory():
             logger.debug('Whisker-box plot not working.')
         #
 	#
-    
  
     def scatterPlot():
         try:
@@ -114,21 +113,41 @@ class scientificCategory():
         #
 	#
 
-    def calculateJointProbabilities(): # MY BIT
+    def calculateJointProbabilities():
         try:
             logger.info('Calculating the joint probabilities...')
-            A = np.random.normal(size=100)
-            B = np.random.normal(size=100)
-            df = pd.DataFrame({'A': A, 'B': B})
-            s = seaborn.jointplot(data = df, x ='A', y='B',kind="scatter", height=6, ratio=5)
-            s.show()
+            # Read the data from the CSV file
+            df = pd.read_csv('Root\Input\data.csv', sep=',', index_col=0)
+            
+            # Group by Subgroup and Taxonomic Group, then count occurrences
+            grouped = df.groupby(['Taxonomic Subgroup', 'Taxonomic Group']).size().reset_index(name='Count')
+            
+            # Normalize counts to get proportions
+            grouped['Proportion'] = grouped.groupby('Taxonomic Subgroup')['Count'].transform(lambda x: x / x.sum())
+            
+            # Visualize the results
+            sns.barplot(data=grouped, x='Taxonomic Subgroup', y='Count', hue='Taxonomic Group',dodge=False)
+            plt.title('Frequency of Taxonomic Groups by Taxonomic Subgroup')
+            plt.xlabel('Taxonomic Subgroup')
+            plt.ylabel('Count')
+            plt.legend(title='Taxonomic Group')
+
+            # Adjust width and heigh of png
+            taxGroup = len(df['Taxonomic Group'].unique())
+            plt.gcf().set_size_inches(taxGroup * 0.5, 6)  
+            subgroup = len(df['Taxonomic Subgroup'].unique())
+            plt.gcf().set_size_inches(subgroup * 0.5, 6)
+            
+            plt.gca().tick_params(axis='x', labelsize=3) # Adjust font size of tick labels on x-axis
+
+            plt.savefig('Root\Output\jointProbabilities.png')  # Save the plot as an image
+            plt.show()
         #
-        except:
-            print('Not calculating the joint probabilities.')
-            logger.debug('Not calculating the joint probabilities.')
+        except Exception as e:
+            print('Error occurred while calculating the joint probabilities:', e)
+            logger.error('Error occurred while calculating the joint probabilities: %s', e)
         #
-	#
-    
+    #
     
     def calculateConditionalProbabilities(self, holder):
         try:
@@ -214,8 +233,5 @@ class scientificCategory():
             logger.debug('Not querying search function.')
         #
 	#
-    scatterPlot()
-    calculations()
-    calculateJointProbabilities()  
-    whiskerBoxPlot()
+    calculateJointProbabilities() 
 #
