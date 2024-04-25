@@ -48,15 +48,14 @@ class scientificCategory():
         #
     #
  
-    def whiskerBoxPlot(): 
+    def whiskerBoxPlot(data): 
         try:
             logger.info('Displaying data as whisker-box plot...')
-            sciCat = pd.read_csv('Root\Input\data.csv', index_col="Taxonomic Subgroup")
-            # Drop rows with missing values (NaNs)
-            sciCat.dropna(inplace=True)
+             # Drop rows with missing values (NaNs)
+            data["Taxonomic Subgroup"].dropna(inplace=True)
             
             # Convert data to numeric type (if necessary)
-            sciCat = sciCat.apply(pd.to_numeric, errors='coerce')
+            sciCat = data.apply(pd.to_numeric, errors='coerce')
             
             # Check if data is empty after dropping NaNs
             if sciCat.empty:
@@ -78,7 +77,7 @@ class scientificCategory():
         #
 	#
  
-    def scatterPlot():
+    def scatterPlot(data):
         try:
             logger.info('Visualize data distributions in a scatter plot...')
             try:
@@ -179,11 +178,11 @@ class scientificCategory():
         #
     #
     
-    def calculateConditionalProbabilities(self, holder):
+    def calculateConditionalProbabilities(data, a, b):
         try:
             logger.info('Calculating the conditional probabilities...')
-            ##will calculate conditional probabilities and return result
-            return holder
+            prob = pd.crosstab(data[a], data[b], normalize='columns')
+            return prob
         #
         except:
             print('Not calculating the conditional probabilities.')
@@ -263,5 +262,6 @@ class scientificCategory():
             logger.debug('Not querying search function.')
         #
 	#
-    whiskerBoxPlot()
+    whiskerBoxPlot(dataframeCSV)
+    
 #
