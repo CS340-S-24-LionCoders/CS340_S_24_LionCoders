@@ -15,6 +15,8 @@ class scientificCategory():
         self.scientificName = []
         self.commonName = []
         self.config = ()
+        df = pd.read_csv('YatesBiodiversity.csv', index_col='county') 
+        booleanIndex = pd.DataFrame(df, index = [True, False, True, False, True, False, True, False])
     #
     try:
         logger.info('Reading csv file and storing into a dataframe...')
@@ -199,7 +201,10 @@ class scientificCategory():
     def findOrganisim(self, userInput):
         try:
             logger.info('Querying search function...')
+
             #this function will return an organisim that user wants or will return 'NOT FOUND' if not in dataset
+            df = pd.DataFrame(dict, index = [True, False, True, False])
+
             return userInput 
         #
         except:

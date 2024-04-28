@@ -15,6 +15,7 @@ class organism:
         self.taxonomicGroup = ["Birds", "Amphibians"]
     #
 
+
     #config dictionary 
     config =  dict()
 
@@ -32,6 +33,7 @@ class organism:
                     logger.info('Sorting frequency of taxonomic groups...')
                     #freq_counts_sorted = grouped_taxonmic.sort_values()
                     freq_counts_sorted = grouped_taxonmic.sort_index()
+                    print(freq_counts_sorted)
 
                     plt.hist(freq_counts_sorted,bins=30,alpha = 0.45, color = 'red')
                     plt.ylabel('Taxonomic Group Frequency')
@@ -121,7 +123,7 @@ class organism:
                 print(scientificName)
             elif userInput == "commonName":
 	            #do task 5
-                commonName = pd.DataFrame(self.category)
+                commonName = pd.DataFrame(self.commonName)
                 print(commonName)
                  
         except IOError:
@@ -148,3 +150,4 @@ class organism:
     histogram()
     linePlot()
 #
+

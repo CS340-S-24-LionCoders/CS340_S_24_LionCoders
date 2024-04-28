@@ -11,6 +11,7 @@ def main():
 
     #testing Visiual Distributions method
     testOrganism.histogram()
+    testOrganism.linePlot()
 
     
     #testing other class methods
