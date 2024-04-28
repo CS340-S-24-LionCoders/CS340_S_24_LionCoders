@@ -19,19 +19,16 @@ class organism:
     #config dictionary 
     config =  dict()
 
-    def histogram():
+    def histogram(dataFrame):
         try:
             logger.info('Visualize data distributions in a histogram...')
             try:
-                df = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',',index_col="Taxonomic Group")
                 try:
-                    
+
                     logger.info('Getting frequency of taxonomic groups...')
-                    #freq_counts = df['Taxonomic Group'].value_counts()
-                    grouped_taxonmic = df.groupby('Taxonomic Group').value_counts()
-                    
+                    grouped_taxonmic = dataFrame.index.value_counts()
+
                     logger.info('Sorting frequency of taxonomic groups...')
-                    #freq_counts_sorted = grouped_taxonmic.sort_values()
                     freq_counts_sorted = grouped_taxonmic.sort_index()
                     print(freq_counts_sorted)
 
@@ -39,8 +36,9 @@ class organism:
                     plt.ylabel('Taxonomic Group Frequency')
                     plt.xlabel('Taxonomic Groups')
                     plt.title('Histogram of Yates Biodiversity')
-                    plt.show()
                     plt.savefig('Root\Output\histogram.png')
+                    plt.show()
+                    
                     logger.info('Successfully histogram visualize.')
                 #
                 except:
@@ -57,15 +55,15 @@ class organism:
             print('Histogram not working.')
             logger.debug('Histogram not working.')
         #
+        return plt.show()
     #
 
-    def linePlot():
+    def linePlot(dataFrame):
         try:
             logger.info('Visualize data distributions in a line plot...')
             try:
-                df = pd.read_csv('Root\Input\YatesBiodiversity.csv',index_col="Taxonomic Group")
                 try:
-                    freq_counts = df.index.value_counts() #gets the number of occurences of each Taxonomic Group 
+                    freq_counts = dataFrame.index.value_counts() #gets the number of occurences of each Taxonomic Group 
                     freq_counts_sorted = freq_counts.sort_index() #sorts by index 
                     n = len(freq_counts)
                     x = np.arange(1,n+1)
@@ -74,9 +72,8 @@ class organism:
                     plt.title('Line Plot of Yates Biodiversity')
                     plt.xlabel('Taxonomic Groups')
                     plt.ylabel('Taxonomic Group Frequency')
-                    plt.savefig('Root\Output\linePlot.png', dpi=300)
-                    plt.show()
                     plt.savefig('Root\Output\linePlot.png')
+                    plt.show()
                     logger.info('Completed line plot...')
                 #
                 except:
@@ -94,9 +91,6 @@ class organism:
             logger.debug('Line plot not working.')
         #
     #
-        #
-    #
-
 
     #query search function
     def findCategory(self, userInput):
@@ -109,45 +103,32 @@ class organism:
 	            #do task 1
                 category = pd.DataFrame(self.category)
                 print(category)                   
+            #
             elif userInput == "taxonomicGroup":
 	            #do task 2
                 taxonomicGroup = pd.DataFrame(self.taxonomicGroup)
                 print(taxonomicGroup)
+            #
             elif userInput == "taxonomicSubgroup":
 	            #do task 3
                 taxonomicSubgroup = pd.DataFrame(self.taxonomicSubgroup)
                 print(taxonomicSubgroup)
+            #
             elif userInput == "scientificName":
 	            #do task 4
                 scientificName = pd.DataFrame(self.scientificName)
                 print(scientificName)
+            #
             elif userInput == "commonName":
 	            #do task 5
                 commonName = pd.DataFrame(self.commonName)
                 print(commonName)
-                 
+            #
+        #   
         except IOError:
             print('Not querying search function.')
             logger.debug('Not querying search function.')
         #
-
     #
-    def addCategory(self, category):
-        self.category.append(category)
-    #
-    def addTaxonomicGroup(self, group):
-        self.taxonomicGroup.append(group)
-    #
-    def addTaxonomicSubgroup(self, subgroup):
-        self.taxonomicSubgroup.append(subgroup)
-    #
-    def addScientificName(self, name):
-        self.scientificName.append(name)
-    #
-    def addCommonName(self, name):
-        self.commonName.append(name)
-    #
-    histogram()
-    linePlot()
 #
 
