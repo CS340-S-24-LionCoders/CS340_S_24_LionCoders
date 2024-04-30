@@ -51,15 +51,12 @@ def main():
             
             if calcPick == 1: # works
                 scientificCategory.calculateJointProbabilities(scientificCategory.dataframeCSV,'Taxonomic Subgroup','Taxonomic Group')
-                
             #
             elif calcPick == 2: # in progress
-                scientificCategory.calculations(scientificCategory.dataframeCSV)
-                
+                scientificCategory.calculations(scientificCategory.dataframeCSV, "Scientific Category")
             #
             elif calcPick == 3: # works
                 scientificCategory.calculateJointCounts(scientificCategory.dataframeCSV, 'Taxonomic Subgroup', 'Taxonomic Group')
-                
             #
             elif calcPick == 4: # works
                 x = scientificCategory.calculateConditionalProbabilities(scientificCategory.dataframeCSV, 'Taxonomic Subgroup', 'Taxonomic Group')

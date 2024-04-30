@@ -16,8 +16,6 @@ class scientificCategory():
         self.scientificName = []
         self.commonName = []
         self.config = ()
-        df = pd.read_csv('YatesBiodiversity.csv', index_col='county') 
-        searchResult = pd.DataFrame()
     #
     try:
         logger.info('Reading csv file and storing into a dataframe...')
@@ -48,6 +46,7 @@ class scientificCategory():
             print('Violin plot not working.')
             logger.debug('Violin plot not working.')
         #
+        return plt.show()
     #
  
     def whiskerBoxPlot(data): 
@@ -77,6 +76,7 @@ class scientificCategory():
             print('Error occurred while creating whisker-box plot:', e)
             logger.error('Error occurred while creating whisker-box plot: %s', e)
         #
+        return plt.show()
 	#
  
     def scatterPlot(data):
@@ -85,7 +85,7 @@ class scientificCategory():
             try:
                 try:
                     # Calculate frequency counts of scientific categories
-                    freq_counts = data["Taxonomic Subgroup"].index.value_counts() 
+                    freq_counts = data["Taxonomic Subgroup"].index.value_counts()
                     freq_counts_sorted = freq_counts.sort_index() 
                     n = len(freq_counts)
                     x = np.arange(1,n+1)
@@ -115,6 +115,7 @@ class scientificCategory():
             print('Scatter plot not working.')
             logger.debug('Scatter plot not working.')
         #
+        return plt.show()
     #
     
     #calculations section 
@@ -137,6 +138,7 @@ class scientificCategory():
             print('Not calculating the joint counts.')
             logger.debug('Not calculating the joint counts.')
         #
+        return plt.show()
 	#
 
     def calculateJointProbabilities(df, a, b):
@@ -171,6 +173,7 @@ class scientificCategory():
             print('Error occurred while calculating the joint probabilities:', e)
             logger.error('Error occurred while calculating the joint probabilities: %s', e)
         #
+        return plt.show()
     #
     
     def calculateConditionalProbabilities(data, a, b):
@@ -185,22 +188,39 @@ class scientificCategory():
         #
     #
     
-    def calculations():
+    def calculations(data, a):
         try:
-            sciCat = pd.read_csv('Root\Input\YatesBiodiversity.csv',index_col="Scientific Category")
             try: 
-                print("The mean is: ")
-                print(sciCat.mean())
+                try:
+                    print("The mean is: ")
+                    print(data[a].mean())
+                #
 
-                print("The median is: ")
-                print(sciCat.median())
-
-                print("The standard deviation is ")
-                print(sciCat.std())
-
+                except:
+                    print('Caluculating mean is not working.')
+                    logger.debug('Caluculating mean is not working.')
+                #
+                try:
+                    print("The median is: ")
+                    print(data[a].median())
+                #
+                except:
+                    print('Caluculating median is not working.')
+                    logger.debug('Caluculating median is not working.')
+                #
+                try:
+                    print("The standard deviation is ")
+                    print(data[a].std())
+                #
+                except:
+                    print('Caluculating standard deviation is not working.')
+                    logger.debug('Caluculatingstandard deviation is not working.')
+                #
+            #
             except:
                 print('Caluculating mean, median, and standard deviation is not working.')
                 logger.debug('Caluculating mean, median, and standard deviation is not working.')
+            #
         #
         except:
             print("Not reading dataset.")
@@ -246,44 +266,16 @@ class scientificCategory():
         #
 	#
     
-    def findTaxonomicGroup(self,userInput):
+    def findOrganisim(self, userInput):
         try:
             logger.info('Querying search function...')
-            #this is a boolean index series that goes by the Sub Taxonomic Group
-            booleanIndex = pd.Series({1: True, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False, 11: False, 12: False, 13: False, 14: False, 15: False, 16: False, 17: False, 18: False, 19: False, 20: False, 21: False, 22: False, 23: False, 24: False, 25: False, 26: False, 27: False, 28: False, 29: False, 30: False, 31: False, 32: False, 33: False, 34: False, 35: False, 36: False, 37: False, 38: False, 39: False, 40: False, 41: False, 42: False, 43: False, 44: False, 45: False, 46: False, 47: False, 48: False, 49: False, 50: False})
-            if(userInput == "Amphibians" or userInput == "Beetles" or userInput == "Birds" or userInput == "Butterflies and Moths" or userInput == "Fish" or userInput == "Other Animals" or userInput == "Reptiles" or userInput == "Ferns and Fern Allies" or userInput == "Mammals" or userInput == "Flowering Plants" or userInput == "Mosses" ):
-                if(pd.DataFrame(self.taxonomicGroup) == "Amphibians"):
-                    searchResult = pd.DataFrame(self.taxonomicGroup)
-                    print(searchResult)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Beetles"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Birds"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Butterflies and Moths"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Fish"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Other Animals"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Reptiles"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Ferns and Fern Allies"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Mammals"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Flowering Plants"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Mosses"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-            else:
-                print("Taxonomix Group Not Found")
-            
+            #this function will return an organisim that user wants or will return 'NOT FOUND' if not in dataset
+            return userInput 
         #
         except:
             print('Not querying search function.')
             logger.debug('Not querying search function.')
         #
 	#
-    x = calculateConditionalProbabilities(dataframeCSV, 'Taxonomic Subgroup', 'Taxonomic Group')
-    print(x)
+    
 #
