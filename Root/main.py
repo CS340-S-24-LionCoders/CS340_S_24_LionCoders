@@ -67,8 +67,6 @@ def main():
             print("\t\t1) Find category.")
             print("\t\t2) Find taxonomic group.")
             print("\t\t3) Find taxonomic Subgroup.")
-            print("\t\t4) Find scientific name.")
-            print("\t\t5) Find common name.")
             finding = int(input("Enter what you'd like to find: "))
             
             if finding == 1:
@@ -80,12 +78,6 @@ def main():
             #
             elif finding == 3:
                 organism.findCategory(scientificCategory.dataframeCSV, "taxonomicSubgroup")
-            #
-            elif finding == 4:
-                organism.findCategory(scientificCategory.dataframeCSV, "scientificName")
-            #
-            elif finding == 5:
-                organism.findCategory(scientificCategory.dataframeCSV, "commonName")
             #
         #
         elif userTask == 4: # works
