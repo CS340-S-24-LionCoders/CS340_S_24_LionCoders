@@ -13,7 +13,7 @@ def main():
         print("\tMenu:")
         print("\t\t1) Show Taxonomic Frequency with a graph of your choice")
         print("\t\t2) Perform a calculation")
-        print("\t\t3) Find a specific Catergory, Taxonomic Group, Taxonomic Subgroup, Scientific Name, or Common Name in the dataset")
+        print("\t\t3) Find a specific Catergory, Taxonomic Group, or Taxonomic Subgroup in the dataset")
         print("\t\t4) Exit the program.")
         userTask = int(input("Please choice your task: "))
         if userTask == 1:
