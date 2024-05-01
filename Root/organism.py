@@ -35,11 +35,8 @@ class organism:
                     plt.xlabel('Taxonomic Groups')
                     plt.title('Histogram of Yates Biodiversity')
                     plt.savefig('Root\Output\histogram.png')
-                    plt.show()
-                    
                     logger.info('Successfully histogram visualize.')
-                    
-                    return plt.show()
+                    return plt
                 #
                 except:
                     print("Not displaying histogram.")
@@ -55,6 +52,7 @@ class organism:
             print('Histogram not working.')
             logger.debug('Histogram not working.')
         #
+        
     #
 
     def linePlot(dataFrame):
@@ -72,8 +70,8 @@ class organism:
                     plt.xlabel('Taxonomic Groups')
                     plt.ylabel('Taxonomic Group Frequency')
                     plt.savefig('Root\Output\linePlot.png')
-                    plt.show()
                     logger.info('Completed line plot...')
+                    return plt
                 #
                 except:
                     print("Not displaying line plot.")
@@ -257,9 +255,8 @@ class organism:
                 print("\t\t10) Find all the Cardinals and Buntings.")
                 print("\t\t11) Find all the Blackbirds and Orioles.")
                 print("\t\t12) Find all the Frogs and Toads.")
-
-
                 taxonomicSubgroupPick = int(input("Enter what you'd like to find: "))
+
                 if taxonomicSubgroupPick == 1:
                     try:
                         target = "Other Mosses"

@@ -23,22 +23,57 @@ def main():
             print("\t\t3) Display a scatter plot representation of the data.")
             print("\t\t4) Display a whisker-box plot representation of the data.")
             print("\t\t5) Display a violin plot representation of the data.")
-            graphPick = input("What kind of graph would you like to see? ")
+            graphPick = int(input("Enter a choice: "))
             
-            if graphPick == 1:
-                organism.histogram(scientificCategory.dataframeCSV)
+            if graphPick == 1: # works
+                try: 
+                    plotHistogram = organism.histogram(scientificCategory.dataframeCSV)
+                    plotHistogram.show()
+                #
+                except:
+                    print("Histogram not working in main")
+                    logger.debug("Histogram not working in main")
+                #
             #
-            elif graphPick == 2:
-                organism.linePlot(scientificCategory.dataframeCSV)
+            elif graphPick == 2: # works
+                try:
+                    plotLine = organism.linePlot(scientificCategory.dataframeCSV)
+                    plotLine.show()
+                #
+                except:
+                    print("Line plot not working in main")
+                    logger.debug("Line plot not working in main")
+                #
             #
-            elif graphPick == 3:
-                scientificCategory.scatterPlot(scientificCategory.dataframeCSV)
+            elif graphPick == 3: # works
+                try:
+                    plotScatter = scientificCategory.scatterPlot(scientificCategory.dataframeCSV)
+                    plotScatter.show()
+                #
+                except:
+                    print("Scatter plot not working in main")
+                    logger.debug("Scatter plot not working in main")
+                #
             #
-            elif graphPick == 4:
-                scientificCategory.whiskerBoxPlot(scientificCategory.dataframeCSV)
+            elif graphPick == 4: # works
+                try:
+                    plotWhisker = scientificCategory.whiskerBoxPlot(scientificCategory.dataframeCSV)
+                    plotWhisker.show()
+                #
+                except:
+                    print("Whisker plot not working in main")
+                    logger.debug("Whisker plot not working in main")
+                #
             #
-            elif graphPick == 5:
-                scientificCategory.violinPlot(scientificCategory.dataframeCSV)
+            elif graphPick == 5: # not working
+                try:
+                    plotViolin = scientificCategory.violinPlot(scientificCategory.dataframeCSV)
+                    plotViolin.show()
+                #
+                except:
+                    print("Violin plot not working in main")
+                    logger.debug("Violin plot not working in main")
+                #
             #
         #
         elif userTask == 2:
@@ -63,7 +98,7 @@ def main():
                 print(x)
             #
         #
-        elif userTask == 3:
+        elif userTask == 3: # works
             print("\t\t1) Find category.")
             print("\t\t2) Find taxonomic group.")
             print("\t\t3) Find taxonomic Subgroup.")
