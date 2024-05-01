@@ -85,8 +85,7 @@ class organism:
             logger.debug('Line plot not working.')
         #
     #
-    linePlot(scientificCategory.dataframeCSV).show()
-
+    
     #query search function
     def findCategory(dataFrame, userInput): # in progress
         try:

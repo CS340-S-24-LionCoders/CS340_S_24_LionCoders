@@ -46,19 +46,15 @@ class scientificCategory():
             plt.ylabel("Year Last Documented")
             plt.title("Violin Plot for Year Last Documented")
             plt.savefig('Root\Output\ViolinPlot.png', dpi = 300)
-            plt.show()
-            
+            return plt
             #
         #
         except:
             print('Violin plot not working.')
             logger.debug('Violin plot not working.')
         #
-        return plt
     #
-    violinPlot(dataframeCSV)
 
- 
     def whiskerBoxPlot(data): 
         try:
             logger.info('Displaying data as whisker-box plot...')
@@ -94,7 +90,7 @@ class scientificCategory():
             try:
                 try:
                     # Calculate frequency counts of scientific categories
-                    freq_counts = data['Taxonomic Subgroup'].index.value_counts()
+                    freq_counts = data['Taxonomic Subgroup'].value_counts()
                     freq_counts_sorted = freq_counts.sort_index() 
                     n = len(freq_counts)
                     x = np.arange(1,n+1)

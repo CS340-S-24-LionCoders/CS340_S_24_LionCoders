@@ -16,7 +16,7 @@ def main():
         print("\t\t3) Find a specific Catergory, Taxonomic Group, or Taxonomic Subgroup in the dataset")
         print("\t\t4) Exit the program.")
         userTask = int(input("Please choice your task: "))
-        if userTask == 1: # the graphs all work but they look bad
+        if userTask == 1:
             print("\tGraph Menu:")
             print("\t\t1) Display a histogram representation of the data.")
             print("\t\t2) Display a line plot representation of the data.")
@@ -34,7 +34,7 @@ def main():
                     logger.debug("Histogram not working in main")
                 #
             #
-            elif graphPick == 2: # works
+            elif graphPick == 2: # success!
                 try:
                     organism.linePlot(scientificCategory.dataframeCSV).show()
                 #
@@ -43,30 +43,27 @@ def main():
                     logger.debug("Line plot not working in main")
                 #
             #
-            elif graphPick == 3: # works
+            elif graphPick == 3: # success!
                 try:
-                    plotScatter = scientificCategory.scatterPlot(scientificCategory.dataframeCSV)
-                    plotScatter.show()
+                    scientificCategory.scatterPlot(scientificCategory.dataframeCSV).show()
                 #
                 except:
                     print("Scatter plot not working in main")
                     logger.debug("Scatter plot not working in main")
                 #
             #
-            elif graphPick == 4: # works
+            elif graphPick == 4: # success!
                 try:
-                    plotWhisker = scientificCategory.whiskerBoxPlot(scientificCategory.dataframeCSV)
-                    plotWhisker.show()
+                    scientificCategory.whiskerBoxPlot(scientificCategory.dataframeCSV).show()
                 #
                 except:
                     print("Whisker plot not working in main")
                     logger.debug("Whisker plot not working in main")
                 #
             #
-            elif graphPick == 5: # works
+            elif graphPick == 5: # works but not correct
                 try:
-                    plotViolin = scientificCategory.violinPlot(scientificCategory.dataframeCSV)
-                    plotViolin.show()
+                    scientificCategory.violinPlot(scientificCategory.dataframeCSV).show()
                 #
                 except:
                     print("Violin plot not working in main")
@@ -103,8 +100,7 @@ def main():
             finding = int(input("Enter what you'd like to find: "))
             
             if finding == 1:
-                x = organism.findCategory(scientificCategory.dataframeCSV, "category")
-                print(x)
+                organism.findCategory(scientificCategory.dataframeCSV, "category")
             #
             elif finding == 2:
                 organism.findCategory(scientificCategory.dataframeCSV, "taxonomicGroup")
