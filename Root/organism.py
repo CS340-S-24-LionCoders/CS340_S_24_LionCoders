@@ -57,7 +57,7 @@ class organism:
             logger.info('Visualize data distributions in a line plot...')
             try:
                 try:
-                    freq_counts = dataFrame.index.value_counts() #gets the number of occurences of each Taxonomic Group 
+                    freq_counts = dataFrame["Taxonomic Group"].value_counts() #gets the number of occurences of each Taxonomic Group 
                     freq_counts_sorted = freq_counts.sort_index() #sorts by index 
                     n = len(freq_counts)
                     x = np.arange(1,n+1)
@@ -85,6 +85,7 @@ class organism:
             logger.debug('Line plot not working.')
         #
     #
+    linePlot(scientificCategory.dataframeCSV).show()
 
     #query search function
     def findCategory(dataFrame, userInput): # in progress
