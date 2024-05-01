@@ -36,8 +36,7 @@ def main():
             #
             elif graphPick == 2: # works
                 try:
-                    plotLine = organism.linePlot(scientificCategory.dataframeCSV)
-                    plotLine.show()
+                    organism.linePlot(scientificCategory.dataframeCSV).show()
                 #
                 except:
                     print("Line plot not working in main")
