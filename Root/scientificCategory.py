@@ -41,17 +41,22 @@ class scientificCategory():
         try:
             logger.info('Displaying data as violin plot...')
             #data['Year Last Documented'] = data['Year Last Documented'].fillna(0)
-            print(data['Year Last Documented'])
-            sns.violinplot(x = data['Category'], y = data['Year Last Documented'], data = data)
+            sns.violinplot(x = data['Category'].value_counts(), y = data['Year Last Documented'].value_counts(), data = data)
+            plt.xlabel("Category")
+            plt.ylabel("Year Last Documented")
+            plt.title("Violin Plot for Year Last Documented")
             plt.savefig('Root\Output\ViolinPlot.png', dpi = 300)
             plt.show()
+            
             #
         #
         except:
             print('Violin plot not working.')
             logger.debug('Violin plot not working.')
         #
+        return plt
     #
+    violinPlot(dataframeCSV)
 
  
     def whiskerBoxPlot(data): 
