@@ -20,7 +20,9 @@ class scientificCategory():
     try:
         logger.info('Reading csv file and storing into a dataframe...')
         dataframeCSV = pd.read_csv('Root\Input\data.csv',sep=',', index_col=0)
+        ComplexCSV = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',', index_col=0)
         logger.info('Reading csv file and storing into a dataframe successful!')
+    #
     except:
         print('Not loading csv file.')
         logger.debug('Not loading csv file.')
@@ -38,16 +40,19 @@ class scientificCategory():
     def violinPlot(data):
         try:
             logger.info('Displaying data as violin plot...')
-            sns.set(style='whitegrid')
-            dataset = sns.load_dataset(data)
-            #seaborn.violinplot(x="an x-axis value" , y = "an y-axis value" data=dataset) //something is wrong with this line
+            #data['Year Last Documented'] = data['Year Last Documented'].fillna(0)
+            print(data['Year Last Documented'])
+            sns.violinplot(x = data['Category'], y = data['Year Last Documented'], data = data)
+            plt.savefig('Root\Output\ViolinPlot.png', dpi = 300)
+            plt.show()
+            #
         #
         except:
             print('Violin plot not working.')
             logger.debug('Violin plot not working.')
         #
-        return plt.show()
     #
+
  
     def whiskerBoxPlot(data): 
         try:
@@ -70,13 +75,12 @@ class scientificCategory():
             plt.ylabel("Values")
             plt.title("Box-and-Whisker Plot")
             plt.savefig('Root\Output\whiskerBoxPlot.png')
-            plt.show()
+            return plt
         #
         except Exception as e:
             print('Error occurred while creating whisker-box plot:', e)
             logger.error('Error occurred while creating whisker-box plot: %s', e)
         #
-        return plt.show()
 	#
  
     def scatterPlot(data):
@@ -85,7 +89,7 @@ class scientificCategory():
             try:
                 try:
                     # Calculate frequency counts of scientific categories
-                    freq_counts = data["Taxonomic Subgroup"].index.value_counts()
+                    freq_counts = data['Taxonomic Subgroup'].index.value_counts()
                     freq_counts_sorted = freq_counts.sort_index() 
                     n = len(freq_counts)
                     x = np.arange(1,n+1)
@@ -97,9 +101,8 @@ class scientificCategory():
                     plt.xlabel('Taxonomic Subgroup')
                     plt.ylabel('Taxonomic Subgroup Frequency')
                     plt.savefig('Root\Output\scatterPlot.png')
-                    plt.show()
-
                     logger.info('Completed scatter plot...')
+                    return plt
                 #
                 except:
                     print("Not displaying scatter plot.")
@@ -115,7 +118,6 @@ class scientificCategory():
             print('Scatter plot not working.')
             logger.debug('Scatter plot not working.')
         #
-        return plt.show()
     #
     
     #calculations section 
@@ -132,13 +134,13 @@ class scientificCategory():
             plt.ylabel('Count')
             plt.title('Joint Counts for Taxonomic Combinations')
             plt.tight_layout()
-            plt.show()
+            plt.savefig('Root\Output\jointCount.png')  # Save the plot as an image
+            return plt
         #
         except:
             print('Not calculating the joint counts.')
             logger.debug('Not calculating the joint counts.')
         #
-        return plt.show()
 	#
 
     def calculateJointProbabilities(df, a, b):
@@ -165,15 +167,13 @@ class scientificCategory():
             
             plt.gca().tick_params(axis='x', labelsize=8) # Adjust font size of tick labels on x-axis
             plt.xticks(rotation=90)
-
             plt.savefig('Root\Output\jointProbabilities.png')  # Save the plot as an image
-            plt.show()
+            return plt
         #
         except Exception as e:
             print('Error occurred while calculating the joint probabilities:', e)
             logger.error('Error occurred while calculating the joint probabilities: %s', e)
         #
-        return plt.show()
     #
     
     def calculateConditionalProbabilities(data, a, b):
@@ -195,7 +195,6 @@ class scientificCategory():
                     print("The mean is: ")
                     print(data[a].mean())
                 #
-
                 except:
                     print('Caluculating mean is not working.')
                     logger.debug('Caluculating mean is not working.')
