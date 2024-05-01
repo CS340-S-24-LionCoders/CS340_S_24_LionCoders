@@ -16,7 +16,7 @@ def main():
         print("\t\t3) Find a specific Catergory, Taxonomic Group, or Taxonomic Subgroup in the dataset")
         print("\t\t4) Exit the program.")
         userTask = int(input("Please choice your task: "))
-        if userTask == 1:
+        if userTask == 1: # the graphs all work but they look bad
             print("\tGraph Menu:")
             print("\t\t1) Display a histogram representation of the data.")
             print("\t\t2) Display a line plot representation of the data.")
@@ -25,10 +25,9 @@ def main():
             print("\t\t5) Display a violin plot representation of the data.")
             graphPick = int(input("Enter a choice: "))
             
-            if graphPick == 1: # works
+            if graphPick == 1: # success!
                 try: 
-                    plotHistogram = organism.histogram(scientificCategory.dataframeCSV)
-                    plotHistogram.show()
+                    organism.histogram(scientificCategory.dataframeCSV).show()
                 #
                 except:
                     print("Histogram not working in main")
@@ -65,7 +64,7 @@ def main():
                     logger.debug("Whisker plot not working in main")
                 #
             #
-            elif graphPick == 5: # not working
+            elif graphPick == 5: # works
                 try:
                     plotViolin = scientificCategory.violinPlot(scientificCategory.dataframeCSV)
                     plotViolin.show()

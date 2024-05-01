@@ -23,17 +23,15 @@ class organism:
             logger.info('Visualize data distributions in a histogram...')
             try:
                 try:
-
                     logger.info('Getting frequency of taxonomic groups...')
-                    grouped_taxonmic = dataFrame.index.value_counts()
-
+                    grouped_taxonmic = dataFrame["Taxonomic Group"].value_counts()
                     logger.info('Sorting frequency of taxonomic groups...')
                     freq_counts_sorted = grouped_taxonmic.sort_index()
 
-                    plt.hist(freq_counts_sorted,bins=30,alpha = 0.45, color = 'red')
+                    plt.hist(freq_counts_sorted.index,bins=30,weights = freq_counts_sorted.values,alpha = 0.45, color = 'red')
                     plt.ylabel('Taxonomic Group Frequency')
                     plt.xlabel('Taxonomic Groups')
-                    plt.title('Histogram of Yates Biodiversity')
+                    plt.title('Histogram of Yates Taxonomic Group Biodiversity')
                     plt.savefig('Root\Output\histogram.png')
                     logger.info('Successfully histogram visualize.')
                     return plt
@@ -51,8 +49,7 @@ class organism:
         except:
             print('Histogram not working.')
             logger.debug('Histogram not working.')
-        #
-        
+        #   
     #
 
     def linePlot(dataFrame):
