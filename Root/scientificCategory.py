@@ -41,7 +41,7 @@ class scientificCategory():
         try:
             logger.info('Displaying data as violin plot...')
             #data['Year Last Documented'] = data['Year Last Documented'].fillna(0)
-            sns.violinplot(x = data['Category'].value_counts(), y = data['Year Last Documented'].value_counts(), data = data)
+            sns.violinplot(x = data['Category'], y = data['Year Last Documented'], data = data)
             plt.xlabel("Category")
             plt.ylabel("Year Last Documented")
             plt.title("Violin Plot for Year Last Documented")
