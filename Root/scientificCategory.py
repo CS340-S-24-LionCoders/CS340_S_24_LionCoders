@@ -178,8 +178,6 @@ class scientificCategory(organism):
             logger.error('Error occurred while calculating the joint probabilities: %s', e)
         #
     #
-
-    
     
     def calculateConditionalProbabilities(data, a, b, outputFile):
         try:
@@ -230,11 +228,97 @@ class scientificCategory(organism):
 
     #categorial attribute section
 
-    def obtainSpecificValue(data, askedValue):
+    def obtainSpecificValue(data):
         try:
             logger.info('Obtaining a specific value...')
-            ##will return the asked value
-            return askedValue
+
+            # making sure that we know all the unique values of are columns
+            uniqueCategory = data["Category"].unique()
+            uniqueGroup = data["Taxonomic Group"].unique()
+            uniqueSubgroup = data["Taxonomic Subgroup"].unique()
+            uniqueScientificName = data["Scientific Name"].unique()
+            uniqueCommonName = data["Common Name"].unique()
+            uniqueYearLastDocumented = data["Year Last Documented"].unique()
+            uniqueNYListingStatus = data["NY Listing Status"].unique()
+            uniqueFederalListingStatus = data["Federal Listing Status"].unique()
+            uniqueStateConservationRank = data["State Conservation Rank"].unique()
+            uniqueGlobalConservationRank = data["Global Conservation Rank"].unique()
+            uniqueDistributionStatus = data["Distribution Status"].unique()
+            
+            print("\tMenu:")
+            print("\t\t 1) Look at the unique values available")
+            print("\t\t 2) Find if a specific value exist")
+            pick = int(input("Enter what you want to be: "))
+            if pick == 1:
+                print("\t Menu:")
+                print("\t\t 1) Unique values for Category")
+                print("\t\t 2) Unique values for Taxonomic Group")
+                print("\t\t 3) Unique values for Taxonomic Subgroup")
+                print("\t\t 4) Unique values for Scientific Name")
+                print("\t\t 5) Unique values for Common Name")
+                print("\t\t 6) Unique values for Year Last Documented")
+                print("\t\t 7) Unique values for NY Listing Status")
+                print("\t\t 8) Unique values for Federal Listing Status")
+                print("\t\t 9) Unique values for State Conservation Rank")
+                print("\t\t 10) Unique values for Global Conservation Rank")
+                print("\t\t 11) Unique values for Distribution Status")
+                
+                askedValue = int(input("Enter what value you're looking for: "))
+                if askedValue == 1:
+                    print(uniqueCategory)
+                #
+                elif askedValue == 2:
+                    print(uniqueGroup)
+                #
+                elif askedValue == 3:
+                    print(uniqueSubgroup)
+                #
+                elif askedValue == 4:
+                    print(uniqueScientificName)
+                #
+                elif askedValue == 5:
+                    print(uniqueCommonName)
+                #
+                elif askedValue == 6:
+                    print(uniqueYearLastDocumented)
+                #
+                elif askedValue == 7:
+                    print(uniqueNYListingStatus)
+                #
+                elif askedValue == 8:
+                    print(uniqueFederalListingStatus)
+                # 
+                elif askedValue == 9:
+                    print(uniqueStateConservationRank)
+                #
+                elif askedValue == 10:
+                    print(uniqueGlobalConservationRank)
+                #
+                elif askedValue == 11:
+                    print(uniqueDistributionStatus)
+                #
+            #
+            elif pick == 2:
+                askedValue = str(input("What is the name of the value you want to find? "))
+                array = [uniqueCategory, uniqueGroup, uniqueSubgroup, uniqueScientificName, uniqueCommonName, uniqueYearLastDocumented, uniqueNYListingStatus, uniqueFederalListingStatus, uniqueStateConservationRank, uniqueGlobalConservationRank, uniqueDistributionStatus]
+                column_names = ['Category', 'Group', 'Subgroup', 'ScientificName', 'CommonName', 'YearLastDocumented', 'NYListingStatus', 'FederalListingStatus', 'StateConservationRank', 'GlobalConservationRank', 'DistributionStatus']
+
+                
+                # Initialize a flag to track if the value is found
+                value_found = False
+
+                # Iterate over each array in the main array
+                for column_name, unique_values in zip(column_names,array):
+                    # Check if the value exists in the current array
+                    if askedValue in unique_values:
+                        print(f"'{askedValue}' exists in the dataset. It can be found under the column '{column_name}'")
+                        value_found = True
+                        break
+                # If the value is not found in any array
+                if not value_found:
+                    print(f"'{askedValue}' does not exist in dataset.")
+                #
+            #
         #
         except:
             print('Not obtaining a specific value.')
