@@ -90,8 +90,7 @@ def main():
                 scientificCategory.calculateJointCounts(scientificCategory.dataframeCSV, 'Taxonomic Subgroup', 'Taxonomic Group')
             #
             elif calcPick == 4: # works
-                x = scientificCategory.calculateConditionalProbabilities(scientificCategory.dataframeCSV, 'Taxonomic Subgroup', 'Taxonomic Group')
-                print(x)
+                scientificCategory.calculateConditionalProbabilities(scientificCategory.dataframeCSV, 'Taxonomic Subgroup', 'Taxonomic Group',"Root\Output\calculateConditionalProbabilities")
             #
         #
         elif userTask == 3: # works

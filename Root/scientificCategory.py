@@ -178,11 +178,11 @@ class scientificCategory(organism):
         #
     #
     
-    def calculateConditionalProbabilities(data, a, b):
+    def calculateConditionalProbabilities(data, a, b, outputFile):
         try:
             logger.info('Calculating the conditional probabilities...')
             prob = pd.crosstab(data[a], data[b], normalize='columns')
-            return prob
+            prob.to_csv(outputFile, index=False)
         #
         except:
             print('Not calculating the conditional probabilities.')
@@ -231,7 +231,7 @@ class scientificCategory(organism):
 
     #categorial attribute section
 
-    def obtainSpecificValue(self, askedValue):
+    def obtainSpecificValue(data, askedValue):
         try:
             logger.info('Obtaining a specific value...')
             ##will return the asked value
@@ -243,7 +243,7 @@ class scientificCategory(organism):
         #
 	#
     
-    def generatePermutationsOfNames(self, holder):
+    def generatePermutationsOfNames(data, holder):
         try:
             logger.info('Generating ordered arrangement of names...')
             ##will return an ordered arrangement of names
@@ -255,7 +255,7 @@ class scientificCategory(organism):
         #
     #
 
-    def generateCombinationsOfNames(self, holder):
+    def generateCombinationsOfNames(data, holder):
         try:
             logger.info('Generating unordered arrangement of names...')
             ##will return a unordered arrangement of names
