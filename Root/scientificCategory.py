@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 from organism import organism
+import statistics as st
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='Root\scientificCategory.log', encoding='utf-8', level=logging.DEBUG)
@@ -153,7 +154,7 @@ class scientificCategory(organism):
             
             # Normalize counts to get proportions
             grouped['Proportion'] = grouped.groupby('Taxonomic Subgroup')['Count'].transform(lambda x: x / x.sum())
-            
+
             # Visualize the results
             sns.barplot(data=grouped, x='Taxonomic Subgroup', y='Count', hue='Taxonomic Group',dodge=False)
             plt.title('Frequency of Taxonomic Groups by Taxonomic Subgroup')
@@ -177,6 +178,8 @@ class scientificCategory(organism):
             logger.error('Error occurred while calculating the joint probabilities: %s', e)
         #
     #
+
+    
     
     def calculateConditionalProbabilities(data, a, b, outputFile):
         try:
@@ -189,45 +192,41 @@ class scientificCategory(organism):
             logger.debug('Not calculating the conditional probabilities.')
         #
     #
-    
-    def calculations(data, a):
-        try:
-            try: 
-                try:
-                    print("The mean is: ")
-                    print(data[a].mean())
-                #
-                except:
-                    print('Caluculating mean is not working.')
-                    logger.debug('Caluculating mean is not working.')
-                #
-                try:
-                    print("The median is: ")
-                    print(data[a].median())
-                #
-                except:
-                    print('Caluculating median is not working.')
-                    logger.debug('Caluculating median is not working.')
-                #
-                try:
-                    print("The standard deviation is ")
-                    print(data[a].std())
-                #
-                except:
-                    print('Caluculating standard deviation is not working.')
-                    logger.debug('Caluculatingstandard deviation is not working.')
-                #
+
+    def calculations(data, a, b):
+        try: 
+            grouped = data.groupby([a, b]).size().reset_index(name='Count')
+            try:
+                print("The mean is: ")
+                print(grouped['Count'].mean())
             #
             except:
-                print('Caluculating mean, median, and standard deviation is not working.')
-                logger.debug('Caluculating mean, median, and standard deviation is not working.')
+                print('Calculating mean is not working.')
+                logger.debug('Calculating mean is not working.')
+            #
+            try:
+                print("The median is: ")
+                print(grouped['Count'].median())
+            #
+            except:
+                print('Calculating median is not working.')
+                logger.debug('Calculating median is not working.')
+            #
+            try:
+                print("The standard deviation is ")
+                print(grouped['Count'].std())
+            #
+            except:
+                print('Calculating standard deviation is not working.')
+                logger.debug('Calculating deviation is not working.')
             #
         #
         except:
-            print("Not reading dataset.")
-            logger.debug('Not reading dataset.')
+            print('Calculating mean, median, and standard deviation is not working.')
+            logger.debug('Calculating mean, median, and standard deviation is not working.')
         #
     #
+    
 
     #categorial attribute section
 

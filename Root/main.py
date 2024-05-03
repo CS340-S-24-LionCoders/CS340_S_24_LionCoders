@@ -73,9 +73,9 @@ def main():
             #
         #
         elif userTask == 2:
-            print("\Calculation Menu:")
+            print("Calculation Menu:")
             print("\t\t1) Calculate joint probabilities.")
-            print("\t\t2) Calculate std, mean, and median.")
+            print("\t\t2) Calculate std, mean, and median for the joint probabilities of Taxonomic Subgroup and Taxonomic Group.")
             print("\t\t3) Calculate joint counts.")
             print("\t\t4) Calculate conditional probabilities.")
             calcPick = int(input("What calculation would you like to perform? "))
@@ -84,7 +84,7 @@ def main():
                 scientificCategory.calculateJointProbabilities(scientificCategory.dataframeCSV,'Taxonomic Subgroup','Taxonomic Group')
             #
             elif calcPick == 2: # in progress
-                scientificCategory.calculations(scientificCategory.dataframeCSV, "Scientific Category")
+                scientificCategory.calculations(scientificCategory.dataframeCSV, 'Taxonomic Subgroup','Taxonomic Group')
             #
             elif calcPick == 3: # works
                 scientificCategory.calculateJointCounts(scientificCategory.dataframeCSV, 'Taxonomic Subgroup', 'Taxonomic Group')
