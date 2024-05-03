@@ -3,11 +3,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
+from organism import organism
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='Root\scientificCategory.log', encoding='utf-8', level=logging.DEBUG)
 
-class scientificCategory():
+class scientificCategory(organism):
     def __init__(self, config):
         super(config)
         self.category = []
@@ -16,8 +17,6 @@ class scientificCategory():
         self.scientificName = []
         self.commonName = []
         self.config = ()
-        df = pd.read_csv('YatesBiodiversity.csv', index_col='county') 
-        searchResult = pd.DataFrame()
     #
     try:
         logger.info('Reading csv file and storing into a dataframe...')
@@ -246,36 +245,11 @@ class scientificCategory():
         #
 	#
     
-    def findTaxonomicSubgroupGroup(self,userInput):
+    def findTaxonomicSubgroupGroup(dataFrame,userInput):
         try:
             logger.info('Querying search function...')
             #this is a boolean index series that goes by the Sub Taxonomic Group
-            booleanIndex = pd.Series({1: True, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False, 11: False, 12: False, 13: False, 14: False, 15: False, 16: False, 17: False, 18: False, 19: False, 20: False, 21: False, 22: False, 23: False, 24: False, 25: False, 26: False, 27: False, 28: False, 29: False, 30: False, 31: False, 32: False, 33: False, 34: False, 35: False, 36: False, 37: False, 38: False, 39: False, 40: False, 41: False, 42: False, 43: False, 44: False, 45: False, 46: False, 47: False, 48: False, 49: False, 50: False})
-            if(userInput == "Amphibians" or userInput == "Beetles" or userInput == "Birds" or userInput == "Butterflies and Moths" or userInput == "Fish" or userInput == "Other Animals" or userInput == "Reptiles" or userInput == "Ferns and Fern Allies" or userInput == "Mammals" or userInput == "Flowering Plants" or userInput == "Mosses" ):
-                if(pd.DataFrame(self.taxonomicGroup) == "Amphibians"):
-                    searchResult = pd.DataFrame(self.taxonomicGroup)
-                    print(searchResult)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Beetles"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Birds"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Butterflies and Moths"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Fish"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Other Animals"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Reptiles"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Ferns and Fern Allies"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Mammals"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Flowering Plants"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-                elif(pd.DataFrame(self.taxonomicGroup) == "Mosses"):
-                    result = pd.DataFrame(self.taxonomicGroup)
-            elif userInput == "taxonomicSubgroup":
+            if userInput == "taxonomicSubgroup":
                 taxonomicSubgroup = dataFrame["Taxonomic Subgroup"]
                 print("\tMenu:")
                 print("\t\t1) Find all the Other Mosses.")
@@ -431,3 +405,31 @@ class scientificCategory():
     x = calculateConditionalProbabilities(dataframeCSV, 'Taxonomic Subgroup', 'Taxonomic Group')
     print(x)
 #
+
+
+
+            # booleanIndex = pd.Series({1: True, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False, 11: False, 12: False, 13: False, 14: False, 15: False, 16: False, 17: False, 18: False, 19: False, 20: False, 21: False, 22: False, 23: False, 24: False, 25: False, 26: False, 27: False, 28: False, 29: False, 30: False, 31: False, 32: False, 33: False, 34: False, 35: False, 36: False, 37: False, 38: False, 39: False, 40: False, 41: False, 42: False, 43: False, 44: False, 45: False, 46: False, 47: False, 48: False, 49: False, 50: False})
+            # if(userInput == "Amphibians" or userInput == "Beetles" or userInput == "Birds" or userInput == "Butterflies and Moths" or userInput == "Fish" or userInput == "Other Animals" or userInput == "Reptiles" or userInput == "Ferns and Fern Allies" or userInput == "Mammals" or userInput == "Flowering Plants" or userInput == "Mosses" ):
+            #     if(pd.DataFrame(self.taxonomicGroup) == "Amphibians"):
+            #         searchResult = pd.DataFrame(self.taxonomicGroup)
+            #         print(searchResult)
+            #     elif(pd.DataFrame(self.taxonomicGroup) == "Beetles"):
+            #         result = pd.DataFrame(self.taxonomicGroup)
+            #     elif(pd.DataFrame(self.taxonomicGroup) == "Birds"):
+            #         result = pd.DataFrame(self.taxonomicGroup)
+            #     elif(pd.DataFrame(self.taxonomicGroup) == "Butterflies and Moths"):
+            #         result = pd.DataFrame(self.taxonomicGroup)
+            #     elif(pd.DataFrame(self.taxonomicGroup) == "Fish"):
+            #         result = pd.DataFrame(self.taxonomicGroup)
+            #     elif(pd.DataFrame(self.taxonomicGroup) == "Other Animals"):
+            #         result = pd.DataFrame(self.taxonomicGroup)
+            #     elif(pd.DataFrame(self.taxonomicGroup) == "Reptiles"):
+            #         result = pd.DataFrame(self.taxonomicGroup)
+            #     elif(pd.DataFrame(self.taxonomicGroup) == "Ferns and Fern Allies"):
+            #         result = pd.DataFrame(self.taxonomicGroup)
+            #     elif(pd.DataFrame(self.taxonomicGroup) == "Mammals"):
+            #         result = pd.DataFrame(self.taxonomicGroup)
+            #     elif(pd.DataFrame(self.taxonomicGroup) == "Flowering Plants"):
+            #         result = pd.DataFrame(self.taxonomicGroup)
+            #     elif(pd.DataFrame(self.taxonomicGroup) == "Mosses"):
+            #         result = pd.DataFrame(self.taxonomicGroup)
