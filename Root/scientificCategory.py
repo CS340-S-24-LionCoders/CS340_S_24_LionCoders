@@ -21,7 +21,9 @@ class scientificCategory(organism):
     try:
         logger.info('Reading csv file and storing into a dataframe...')
         dataframeCSV = pd.read_csv('Root\Input\data.csv',sep=',', index_col=0)
+        ComplexCSV = pd.read_csv('Root\Input\YatesBiodiversity.csv',sep=',', index_col=0)
         logger.info('Reading csv file and storing into a dataframe successful!')
+    #
     except:
         print('Not loading csv file.')
         logger.debug('Not loading csv file.')
@@ -39,16 +41,21 @@ class scientificCategory(organism):
     def violinPlot(data):
         try:
             logger.info('Displaying data as violin plot...')
-            sns.set(style='whitegrid')
-            dataset = sns.load_dataset(data)
-            #seaborn.violinplot(x="an x-axis value" , y = "an y-axis value" data=dataset) //something is wrong with this line
+            #data['Year Last Documented'] = data['Year Last Documented'].fillna(0)
+            sns.violinplot(x = data['Category'].value_counts(), y = data['Year Last Documented'].value_counts(), data = data)
+            plt.xlabel("Category")
+            plt.ylabel("Year Last Documented")
+            plt.title("Violin Plot for Year Last Documented")
+            plt.savefig('Root\Output\ViolinPlot.png', dpi = 300)
+            return plt
+            #
         #
         except:
             print('Violin plot not working.')
             logger.debug('Violin plot not working.')
         #
     #
- 
+
     def whiskerBoxPlot(data): 
         try:
             logger.info('Displaying data as whisker-box plot...')
@@ -70,7 +77,7 @@ class scientificCategory(organism):
             plt.ylabel("Values")
             plt.title("Box-and-Whisker Plot")
             plt.savefig('Root\Output\whiskerBoxPlot.png')
-            plt.show()
+            return plt
         #
         except Exception as e:
             print('Error occurred while creating whisker-box plot:', e)
@@ -84,7 +91,7 @@ class scientificCategory(organism):
             try:
                 try:
                     # Calculate frequency counts of scientific categories
-                    freq_counts = data["Taxonomic Subgroup"].index.value_counts() 
+                    freq_counts = data['Taxonomic Subgroup'].value_counts()
                     freq_counts_sorted = freq_counts.sort_index() 
                     n = len(freq_counts)
                     x = np.arange(1,n+1)
@@ -96,9 +103,8 @@ class scientificCategory(organism):
                     plt.xlabel('Taxonomic Subgroup')
                     plt.ylabel('Taxonomic Subgroup Frequency')
                     plt.savefig('Root\Output\scatterPlot.png')
-                    plt.show()
-
                     logger.info('Completed scatter plot...')
+                    return plt
                 #
                 except:
                     print("Not displaying scatter plot.")
@@ -130,7 +136,8 @@ class scientificCategory(organism):
             plt.ylabel('Count')
             plt.title('Joint Counts for Taxonomic Combinations')
             plt.tight_layout()
-            plt.show()
+            plt.savefig('Root\Output\jointCount.png')  # Save the plot as an image
+            return plt
         #
         except:
             print('Not calculating the joint counts.')
@@ -162,9 +169,8 @@ class scientificCategory(organism):
             
             plt.gca().tick_params(axis='x', labelsize=8) # Adjust font size of tick labels on x-axis
             plt.xticks(rotation=90)
-
             plt.savefig('Root\Output\jointProbabilities.png')  # Save the plot as an image
-            plt.show()
+            return plt
         #
         except Exception as e:
             print('Error occurred while calculating the joint probabilities:', e)
@@ -184,22 +190,38 @@ class scientificCategory(organism):
         #
     #
     
-    def calculations():
+    def calculations(data, a):
         try:
-            sciCat = pd.read_csv('Root\Input\YatesBiodiversity.csv',index_col="Scientific Category")
             try: 
-                print("The mean is: ")
-                print(sciCat.mean())
-
-                print("The median is: ")
-                print(sciCat.median())
-
-                print("The standard deviation is ")
-                print(sciCat.std())
-
+                try:
+                    print("The mean is: ")
+                    print(data[a].mean())
+                #
+                except:
+                    print('Caluculating mean is not working.')
+                    logger.debug('Caluculating mean is not working.')
+                #
+                try:
+                    print("The median is: ")
+                    print(data[a].median())
+                #
+                except:
+                    print('Caluculating median is not working.')
+                    logger.debug('Caluculating median is not working.')
+                #
+                try:
+                    print("The standard deviation is ")
+                    print(data[a].std())
+                #
+                except:
+                    print('Caluculating standard deviation is not working.')
+                    logger.debug('Caluculatingstandard deviation is not working.')
+                #
+            #
             except:
                 print('Caluculating mean, median, and standard deviation is not working.')
                 logger.debug('Caluculating mean, median, and standard deviation is not working.')
+            #
         #
         except:
             print("Not reading dataset.")

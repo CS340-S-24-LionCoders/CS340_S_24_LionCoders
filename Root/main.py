@@ -13,7 +13,7 @@ def main():
         print("\tMenu:")
         print("\t\t1) Show Taxonomic Frequency with a graph of your choice")
         print("\t\t2) Perform a calculation")
-        print("\t\t3) Find a specific Catergory, Taxonomic Group, Taxonomic Subgroup, Scientific Name, or Common Name in the dataset")
+        print("\t\t3) Find a specific Catergory, Taxonomic Group, or Taxonomic Subgroup in the dataset")
         print("\t\t4) Exit the program.")
         userTask = int(input("Please choice your task: "))
         if userTask == 1:
@@ -23,22 +23,52 @@ def main():
             print("\t\t3) Display a scatter plot representation of the data.")
             print("\t\t4) Display a whisker-box plot representation of the data.")
             print("\t\t5) Display a violin plot representation of the data.")
-            graphPick = input("What kind of graph would you like to see? ")
+            graphPick = int(input("Enter a choice: "))
             
-            if graphPick == 1:
-                organism.histogram(scientificCategory.dataframeCSV)
+            if graphPick == 1: # success!
+                try: 
+                    organism.histogram(scientificCategory.dataframeCSV).show()
+                #
+                except:
+                    print("Histogram not working in main")
+                    logger.debug("Histogram not working in main")
+                #
             #
-            elif graphPick == 2:
-                organism.linePlot(scientificCategory.dataframeCSV)
+            elif graphPick == 2: # success!
+                try:
+                    organism.linePlot(scientificCategory.dataframeCSV).show()
+                #
+                except:
+                    print("Line plot not working in main")
+                    logger.debug("Line plot not working in main")
+                #
             #
-            elif graphPick == 3:
-                scientificCategory.scatterPlot(scientificCategory.dataframeCSV)
+            elif graphPick == 3: # success!
+                try:
+                    scientificCategory.scatterPlot(scientificCategory.dataframeCSV).show()
+                #
+                except:
+                    print("Scatter plot not working in main")
+                    logger.debug("Scatter plot not working in main")
+                #
             #
-            elif graphPick == 4:
-                scientificCategory.whiskerBoxPlot(scientificCategory.dataframeCSV)
+            elif graphPick == 4: # success!
+                try:
+                    scientificCategory.whiskerBoxPlot(scientificCategory.dataframeCSV).show()
+                #
+                except:
+                    print("Whisker plot not working in main")
+                    logger.debug("Whisker plot not working in main")
+                #
             #
-            elif graphPick == 5:
-                scientificCategory.violinPlot(scientificCategory.dataframeCSV)
+            elif graphPick == 5: # works but not correct
+                try:
+                    scientificCategory.violinPlot(scientificCategory.dataframeCSV).show()
+                #
+                except:
+                    print("Violin plot not working in main")
+                    logger.debug("Violin plot not working in main")
+                #
             #
         #
         elif userTask == 2:
@@ -51,44 +81,32 @@ def main():
             
             if calcPick == 1: # works
                 scientificCategory.calculateJointProbabilities(scientificCategory.dataframeCSV,'Taxonomic Subgroup','Taxonomic Group')
-                
             #
             elif calcPick == 2: # in progress
-                scientificCategory.calculations(scientificCategory.dataframeCSV)
-                
+                scientificCategory.calculations(scientificCategory.dataframeCSV, "Scientific Category")
             #
             elif calcPick == 3: # works
                 scientificCategory.calculateJointCounts(scientificCategory.dataframeCSV, 'Taxonomic Subgroup', 'Taxonomic Group')
-                
             #
             elif calcPick == 4: # works
                 x = scientificCategory.calculateConditionalProbabilities(scientificCategory.dataframeCSV, 'Taxonomic Subgroup', 'Taxonomic Group')
                 print(x)
             #
         #
-        elif userTask == 3:
+        elif userTask == 3: # works
             print("\t\t1) Find category.")
             print("\t\t2) Find taxonomic group.")
             print("\t\t3) Find taxonomic Subgroup.")
-            print("\t\t4) Find scientific name.")
-            print("\t\t5) Find common name.")
             finding = int(input("Enter what you'd like to find: "))
             
             if finding == 1:
-                x = organism.findCategory(scientificCategory.dataframeCSV, "category")
-                print(x)
+                organism.findCategory(scientificCategory.dataframeCSV, "category")
             #
             elif finding == 2:
                 organism.findCategory(scientificCategory.dataframeCSV, "taxonomicGroup")
             #
             elif finding == 3:
                 organism.findCategory(scientificCategory.dataframeCSV, "taxonomicSubgroup")
-            #
-            elif finding == 4:
-                organism.findCategory(scientificCategory.dataframeCSV, "scientificName")
-            #
-            elif finding == 5:
-                organism.findCategory(scientificCategory.dataframeCSV, "commonName")
             #
         #
         elif userTask == 4: # works
