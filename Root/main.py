@@ -100,13 +100,13 @@ def main():
             finding = int(input("Enter what you'd like to find: "))
             
             if finding == 1:
-                organism.findCategory(scientificCategory.dataframeCSV, "category")
+                organism.findCategory(scientificCategory.dataframeCSV, "category", "Root\Output\searchedCatergory")
             #
             elif finding == 2:
-                scientificCategory.findGroup(scientificCategory.dataframeCSV, "taxonomicGroup")
+                scientificCategory.findGroup(scientificCategory.dataframeCSV, "taxonomicGroup","Root\Output\searchedTaxonomicGroup")
             #
             elif finding == 3:
-                scientificCategory.findGroup(scientificCategory.dataframeCSV, "taxonomicSubgroup")
+                scientificCategory.findGroup(scientificCategory.dataframeCSV, "taxonomicSubgroup","Root\Output\searchedTaxonomicSubgroup")
             #
         #
         elif userTask == 4: # works

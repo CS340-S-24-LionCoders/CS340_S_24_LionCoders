@@ -267,7 +267,7 @@ class scientificCategory(organism):
         #
 	#
     
-    def findGroup(dataFrame, userInput):
+    def findGroup(dataFrame, userInput, outputFile):
         try:
             logger.info('Querying search function...')
             #this is a boolean index series that goes by the Sub Taxonomic Group
@@ -289,7 +289,7 @@ class scientificCategory(organism):
                 if taxonomicGroupPick == 1:
                     try:
                         target = "Butterflies and Moths"
-                        print(dataFrame[taxonomicGroup == target])
+                        filtered_df = (dataFrame[taxonomicGroup == target])
                     #
                     except:
                         print("Searching for taxonmic group Butterflies and Moths not working")
@@ -299,7 +299,7 @@ class scientificCategory(organism):
                 elif taxonomicGroupPick == 2:
                     try:
                         target = "Fish"
-                        print(dataFrame[taxonomicGroup == target])
+                        filtered_df = (dataFrame[taxonomicGroup == target])
                     #
                     except:
                         print("Searching for taxonmic group Fish not working")
@@ -309,7 +309,7 @@ class scientificCategory(organism):
                 elif taxonomicGroupPick == 3:
                     try:
                         target = "Mammals"
-                        print(dataFrame[taxonomicGroup == target])
+                        filtered_df = (dataFrame[taxonomicGroup == target])
                     #
                     except:
                         print("Searching for taxonmic group Mammals not working")
@@ -319,7 +319,7 @@ class scientificCategory(organism):
                 elif taxonomicGroupPick == 4:
                     try:
                         target = "Other Animals"
-                        print(dataFrame[taxonomicGroup == target])
+                        filtered_df = (dataFrame[taxonomicGroup == target])
                     #
                     except:
                         print("Searching for taxonmic group Other Animals not working")
@@ -329,7 +329,7 @@ class scientificCategory(organism):
                 elif taxonomicGroupPick == 5:
                     try:
                         target = "Birds"
-                        print(dataFrame[taxonomicGroup == target])
+                        filtered_df = (dataFrame[taxonomicGroup == target])
                     #
                     except:
                         print("Searching for taxonmic group Birds not working")
@@ -339,7 +339,7 @@ class scientificCategory(organism):
                 elif taxonomicGroupPick == 6:
                     try:
                         target = "Lady Beetles"
-                        print(dataFrame[taxonomicGroup == target])
+                        filtered_df = (dataFrame[taxonomicGroup == target])
                     #
                     except:
                         print("Searching for taxonmic group Lady Beetles not working")
@@ -349,7 +349,7 @@ class scientificCategory(organism):
                 elif taxonomicGroupPick == 7:
                     try:
                         target = "Amphibians"
-                        print(dataFrame[taxonomicGroup == target])
+                        filtered_df = (dataFrame[taxonomicGroup == target])
                     #
                     except:
                         print("Searching for taxonmic group Amphibians not working")
@@ -359,7 +359,7 @@ class scientificCategory(organism):
                 elif taxonomicGroupPick == 8:
                     try:
                         target = "Reptiles"
-                        print(dataFrame[taxonomicGroup == target])
+                        filtered_df = (dataFrame[taxonomicGroup == target])
                     #
                     except:
                         print("Searching for taxonmic group Reptiles not working")
@@ -369,7 +369,7 @@ class scientificCategory(organism):
                 elif taxonomicGroupPick == 9:
                     try:
                         target = "Flowering Plants"
-                        print(dataFrame[taxonomicGroup == target])
+                        filtered_df = (dataFrame[taxonomicGroup == target])
                     #
                     except:
                         print("Searching for taxonmic group Flowering Plants not working")
@@ -379,7 +379,7 @@ class scientificCategory(organism):
                 elif taxonomicGroupPick == 10:
                     try:
                         target = "Ferns and Fern Allies"
-                        print(dataFrame[taxonomicGroup == target])
+                        filtered_df = (dataFrame[taxonomicGroup == target])
                     #
                     except:
                         print("Searching for taxonmic group Fish not working")
@@ -389,7 +389,7 @@ class scientificCategory(organism):
                 elif taxonomicGroupPick == 11:
                     try:
                         target = "Mosses"
-                        print(dataFrame[taxonomicGroup == target])
+                        filtered_df = (dataFrame[taxonomicGroup == target])
                     #
                     except:
                         print("Searching for taxonmic group Mosses not working")
@@ -417,7 +417,7 @@ class scientificCategory(organism):
                 if taxonomicSubgroupPick == 1:
                     try:
                         target = "Other Mosses"
-                        print(dataFrame[taxonomicSubgroup == target])
+                        filtered_df = (dataFrame[taxonomicSubgroup == target])
                     #
                     except:
                         print("Searching for taxonmic subgroup Other Mosses not working")
@@ -427,7 +427,7 @@ class scientificCategory(organism):
                 elif taxonomicSubgroupPick == 2:
                     try:
                         target = "Grasses"
-                        print(dataFrame[taxonomicSubgroup == target])
+                        filtered_df = (dataFrame[taxonomicSubgroup == target])
                     #
                     except:
                         print("Searching for taxonmic subgroup Grasses not working")
@@ -437,7 +437,7 @@ class scientificCategory(organism):
                 elif taxonomicSubgroupPick == 3:
                     try:
                         target = "Asters, Goldenrods and Daisies"
-                        print(dataFrame[taxonomicSubgroup == target])
+                        filtered_df = (dataFrame[taxonomicSubgroup == target])
                     #
                     except:
                         print("Searching for taxonmic subgroup Asters, Goldenrods and Daisies not working")
@@ -447,7 +447,7 @@ class scientificCategory(organism):
                 elif taxonomicSubgroupPick == 4:
                     try:
                         target = "Ferns"
-                        print(dataFrame[taxonomicSubgroup == target])
+                        filtered_df = (dataFrame[taxonomicSubgroup == target])
                     #
                     except:
                         print("Searching for taxonmic subgroup Ferns not working")
@@ -457,7 +457,7 @@ class scientificCategory(organism):
                 elif taxonomicSubgroupPick == 5:
                     try:
                         target = "Snakes"
-                        print(dataFrame[taxonomicSubgroup == target])
+                        filtered_df = (dataFrame[taxonomicSubgroup == target])
                     #
                     except:
                         print("Searching for taxonmic subgroup Snakes not working")
@@ -467,7 +467,7 @@ class scientificCategory(organism):
                 elif taxonomicSubgroupPick == 6:
                     try:
                         target = "Lizards"
-                        print(dataFrame[taxonomicSubgroup == target])
+                        filtered_df = (dataFrame[taxonomicSubgroup == target])
                     #
                     except:
                         print("Searching for taxonmic subgroup Lizards not working")
@@ -477,7 +477,7 @@ class scientificCategory(organism):
                 elif taxonomicSubgroupPick == 7:
                     try:
                         target = "Other Animals"
-                        print(dataFrame[taxonomicSubgroup == target])
+                        filtered_df = (dataFrame[taxonomicSubgroup == target])
                     #
                     except:
                         print("Searching for taxonmic subgroup Other Animals not working")
@@ -487,7 +487,7 @@ class scientificCategory(organism):
                 elif taxonomicSubgroupPick == 8:
                     try:
                         target = "Bats"
-                        print(dataFrame[taxonomicSubgroup == target])
+                        filtered_df = (dataFrame[taxonomicSubgroup == target])
                     #
                     except:
                         print("Searching for taxonmic subgroup Bats not working")
@@ -497,7 +497,7 @@ class scientificCategory(organism):
                 elif taxonomicSubgroupPick == 9:
                     try:
                         target = "Butterflies and Skippers"
-                        print(dataFrame[taxonomicSubgroup == target])
+                        filtered_df = (dataFrame[taxonomicSubgroup == target])
                     #
                     except:
                         print("Searching for taxonmic subgroup Butterflies and Skippers not working")
@@ -507,7 +507,7 @@ class scientificCategory(organism):
                 elif taxonomicSubgroupPick == 10:
                     try:
                         target = "Cardinals and Buntings"
-                        print(dataFrame[taxonomicSubgroup == target])
+                        filtered_df = (dataFrame[taxonomicSubgroup == target])
                     #
                     except:
                         print("Searching for taxonmic subgroup Cardinals and Buntings not working")
@@ -517,7 +517,7 @@ class scientificCategory(organism):
                 elif taxonomicSubgroupPick == 11:
                     try:
                         target = "Blackbirds and Orioles"
-                        print(dataFrame[taxonomicSubgroup == target])
+                        filtered_df = (dataFrame[taxonomicSubgroup == target])
                     #
                     except:
                         print("Searching for taxonmic subgroup Blackbirds and Orioles not working")
@@ -527,7 +527,7 @@ class scientificCategory(organism):
                 elif taxonomicSubgroupPick == 12:
                     try:
                         target = "Frogs and Toads"
-                        print(dataFrame[taxonomicSubgroup == target])
+                        filtered_df = (dataFrame[taxonomicSubgroup == target])
                     #
                     except:
                         print("Searching for taxonmic subgroup Frogs and Toads not working")
@@ -539,6 +539,7 @@ class scientificCategory(organism):
                 print("Taxonomix Group Not Found")
                 logger.debug("Taxonomix Group Not Found")
             #
+            filtered_df.to_csv(outputFile, index=False)
         # 
         except:
             print('Not querying search function.')
