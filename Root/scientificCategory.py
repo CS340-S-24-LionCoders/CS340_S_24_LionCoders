@@ -3,11 +3,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
+from organism import organism
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='Root\scientificCategory.log', encoding='utf-8', level=logging.DEBUG)
 
-class scientificCategory():
+class scientificCategory(organism):
     def __init__(self, config):
         super(config)
         self.category = []
@@ -266,16 +267,163 @@ class scientificCategory():
         #
 	#
     
-    def findOrganisim(self, userInput):
+    def findTaxonomicSubgroupGroup(dataFrame,userInput):
         try:
             logger.info('Querying search function...')
-            #this function will return an organisim that user wants or will return 'NOT FOUND' if not in dataset
-            return userInput 
+            #this is a boolean index series that goes by the Sub Taxonomic Group
+            if userInput == "taxonomicSubgroup":
+                taxonomicSubgroup = dataFrame["Taxonomic Subgroup"]
+                print("\tMenu:")
+                print("\t\t1) Find all the Other Mosses.")
+                print("\t\t2) Find all the Grasses.")
+                print("\t\t3) Find all the Asters, Goldenrods and Daisies.")
+                print("\t\t4) Find all the Ferns.")
+                print("\t\t5) Find all the Snakes.")
+                print("\t\t6) Find all the Lizards.")
+                print("\t\t7) Find all the Other Animals.")
+                print("\t\t8) Find all the Bats.")
+                print("\t\t9) Find all the Butterflies and Skippers.")
+                print("\t\t10) Find all the Cardinals and Buntings.")
+                print("\t\t11) Find all the Blackbirds and Orioles.")
+                print("\t\t12) Find all the Frogs and Toads.")
+                taxonomicSubgroupPick = int(input("Enter what you'd like to find: "))
+
+                if taxonomicSubgroupPick == 1:
+                    try:
+                        target = "Other Mosses"
+                        print(dataFrame[taxonomicSubgroup == target])
+                    #
+                    except:
+                        print("Searching for taxonmic subgroup Other Mosses not working")
+                        logger.debug("Searching for taxonmic subgroup Other Mosses not working")
+                    #
+                #
+                elif taxonomicSubgroupPick == 2:
+                    try:
+                        target = "Grasses"
+                        print(dataFrame[taxonomicSubgroup == target])
+                    #
+                    except:
+                        print("Searching for taxonmic subgroup Grasses not working")
+                        logger.debug("Searching for taxonmic subgroup Grasses not working")
+                    #
+                #
+                elif taxonomicSubgroupPick == 3:
+                    try:
+                        target = "Asters, Goldenrods and Daisies"
+                        print(dataFrame[taxonomicSubgroup == target])
+                    #
+                    except:
+                        print("Searching for taxonmic subgroup Asters, Goldenrods and Daisies not working")
+                        logger.debug("Searching for taxonmic subgroup Asters, Goldenrods and Daisies not working")
+                    #
+                #
+                elif taxonomicSubgroupPick == 4:
+                    try:
+                        target = "Ferns"
+                        print(dataFrame[taxonomicSubgroup == target])
+                    #
+                    except:
+                        print("Searching for taxonmic subgroup Ferns not working")
+                        logger.debug("Searching for taxonmic subgroup Ferns not working")
+                    #
+                #
+                elif taxonomicSubgroupPick == 5:
+                    try:
+                        target = "Snakes"
+                        print(dataFrame[taxonomicSubgroup == target])
+                    #
+                    except:
+                        print("Searching for taxonmic subgroup Snakes not working")
+                        logger.debug("Searching for taxonmic subgroup Snakes not working")
+                    #
+                #
+                elif taxonomicSubgroupPick == 6:
+                    try:
+                        target = "Lizards"
+                        print(dataFrame[taxonomicSubgroup == target])
+                    #
+                    except:
+                        print("Searching for taxonmic subgroup Lizards not working")
+                        logger.debug("Searching for taxonmic subgroup Lizards not working")
+                    #
+                #
+                elif taxonomicSubgroupPick == 7:
+                    try:
+                        target = "Other Animals"
+                        print(dataFrame[taxonomicSubgroup == target])
+                    #
+                    except:
+                        print("Searching for taxonmic subgroup Other Animals not working")
+                        logger.debug("Searching for taxonmic subgroup Other Animals not working")
+                    #
+                #
+                elif taxonomicSubgroupPick == 8:
+                    try:
+                        target = "Bats"
+                        print(dataFrame[taxonomicSubgroup == target])
+                    #
+                    except:
+                        print("Searching for taxonmic subgroup Bats not working")
+                        logger.debug("Searching for taxonmic subgroup Bats not working")
+                    #
+                #
+                elif taxonomicSubgroupPick == 9:
+                    try:
+                        target = "Butterflies and Skippers"
+                        print(dataFrame[taxonomicSubgroup == target])
+                    #
+                    except:
+                        print("Searching for taxonmic subgroup Butterflies and Skippers not working")
+                        logger.debug("Searching for taxonmic subgroup Butterflies and Skippers not working")
+                    #
+                #
+                elif taxonomicSubgroupPick == 10:
+                    try:
+                        target = "Cardinals and Buntings"
+                        print(dataFrame[taxonomicSubgroup == target])
+                    #
+                    except:
+                        print("Searching for taxonmic subgroup Cardinals and Buntings not working")
+                        logger.debug("Searching for taxonmic subgroup Cardinals and Buntings not working")
+                    #
+                #
+                elif taxonomicSubgroupPick == 11:
+                    try:
+                        target = "Blackbirds and Orioles"
+                        print(dataFrame[taxonomicSubgroup == target])
+                    #
+                    except:
+                        print("Searching for taxonmic subgroup Blackbirds and Orioles not working")
+                        logger.debug("Searching for taxonmic subgroup Blackbirds and Orioles not working")
+                    #
+                #
+                elif taxonomicSubgroupPick == 12:
+                    try:
+                        target = "Frogs and Toads"
+                        print(dataFrame[taxonomicSubgroup == target])
+                    #
+                    except:
+                        print("Searching for taxonmic subgroup Frogs and Toads not working")
+                        logger.debug("Searching for taxonmic subgroup Frogs and Toads not working")
+                    #
+                #
+            #
+        #   
+            
+            
+            
+            
+            
+            else:
+                print("Taxonomix Group Not Found")
+            
         #
         except:
             print('Not querying search function.')
             logger.debug('Not querying search function.')
         #
 	#
-    
+    x = calculateConditionalProbabilities(dataframeCSV, 'Taxonomic Subgroup', 'Taxonomic Group')
+    print(x)
 #
