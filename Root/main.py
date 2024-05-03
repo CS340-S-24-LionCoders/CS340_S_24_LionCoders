@@ -61,7 +61,7 @@ def main():
                     logger.debug("Whisker plot not working in main")
                 #
             #
-            elif graphPick == 5: # works but not correct
+            elif graphPick == 5: # success!
                 try:
                     scientificCategory.violinPlot(scientificCategory.dataframeCSV).show()
                 #
@@ -103,10 +103,10 @@ def main():
                 organism.findCategory(scientificCategory.dataframeCSV, "category")
             #
             elif finding == 2:
-                organism.findCategory(scientificCategory.dataframeCSV, "taxonomicGroup")
+                scientificCategory.findGroup(scientificCategory.dataframeCSV, "taxonomicGroup")
             #
             elif finding == 3:
-                organism.findCategory(scientificCategory.dataframeCSV, "taxonomicSubgroup")
+                scientificCategory.findGroup(scientificCategory.dataframeCSV, "taxonomicSubgroup")
             #
         #
         elif userTask == 4: # works
