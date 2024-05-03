@@ -14,7 +14,8 @@ def main():
         print("\t\t1) Show Taxonomic Frequency with a graph of your choice")
         print("\t\t2) Perform a calculation")
         print("\t\t3) Find a specific Catergory, Taxonomic Group, or Taxonomic Subgroup in the dataset")
-        print("\t\t4) Exit the program.")
+        print("\t\t4) Find a specific categorial attribute in the dataset")
+        print("\t\t5) Exit the program.")
         userTask = int(input("Please choice your task: "))
         if userTask == 1:
             print("\tGraph Menu:")
@@ -109,7 +110,23 @@ def main():
                 scientificCategory.findGroup(scientificCategory.dataframeCSV, "taxonomicSubgroup","Root\Output\searchedTaxonomicSubgroup")
             #
         #
-        elif userTask == 4: # works
+        elif  userTask == 4:
+            print("\t\t1) Obtain a specific value.")
+            print("\t\t2) Generate the permutations of names.")
+            print("\t\t3) Generate a combinations of names")
+            finding = int(input("Enter what you'd like to find: "))
+
+            if finding == 1:
+                scientificCategory.obtainSpecificValue(scientificCategory.dataframeCSV)
+            #
+            elif finding == 2:
+                scientificCategory.generatePermutationsOfNames(scientificCategory.dataframeCSV)
+            #
+            elif finding == 3:
+                scientificCategory.generateCombinationsOfNames(scientificCategory.dataframeCSV)
+            #
+        #
+        elif userTask == 5: # works
             print("Goodbye!")
             inTheSystem = False
         #
