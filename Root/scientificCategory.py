@@ -300,22 +300,21 @@ class scientificCategory(organism):
             #
             elif pick == 2:
                 askedValue = str(input("What is the name of the value you want to find? "))
+
                 array = [uniqueCategory, uniqueGroup, uniqueSubgroup, uniqueScientificName, uniqueCommonName, uniqueYearLastDocumented, uniqueNYListingStatus, uniqueFederalListingStatus, uniqueStateConservationRank, uniqueGlobalConservationRank, uniqueDistributionStatus]
                 column_names = ['Category', 'Group', 'Subgroup', 'ScientificName', 'CommonName', 'YearLastDocumented', 'NYListingStatus', 'FederalListingStatus', 'StateConservationRank', 'GlobalConservationRank', 'DistributionStatus']
 
-                
-                # Initialize a flag to track if the value is found
-                value_found = False
+                value_found = False # flag so we know where to stop
 
                 # Iterate over each array in the main array
                 for column_name, unique_values in zip(column_names,array):
-                    # Check if the value exists in the current array
-                    if askedValue in unique_values:
+                    if askedValue in unique_values: # Check if the value exists in the current array
                         print(f"'{askedValue}' exists in the dataset. It can be found under the column '{column_name}'")
                         value_found = True
                         break
-                # If the value is not found in any array
-                if not value_found:
+                    #
+                #
+                if not value_found: # If the value is not found in any array
                     print(f"'{askedValue}' does not exist in dataset.")
                 #
             #
