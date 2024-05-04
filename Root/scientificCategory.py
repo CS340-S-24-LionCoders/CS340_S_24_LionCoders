@@ -5,6 +5,7 @@ import numpy as np
 import seaborn as sns
 from organism import organism
 import statistics as st
+import itertools
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='Root\scientificCategory.log', encoding='utf-8', level=logging.DEBUG)
@@ -337,11 +338,12 @@ class scientificCategory(organism):
         #
     #
 
-    def generateCombinationsOfNames(data, holder):
+    def generateCombinationsOfNames(data, length):
         try:
             logger.info('Generating unordered arrangement of names...')
-            ##will return a unordered arrangement of names
-            return holder
+            names = data['Common Name'].tolist()
+            all_combinations = list(itertools.combinations(names, length))
+            print(all_combinations)
         #
         except:
             print('Not generating unordered arrangement of names.')
