@@ -326,11 +326,14 @@ class scientificCategory(organism):
         #
 	#
     
-    def generatePermutationsOfNames(data, holder):
+    def generatePermutationsOfNames(data, length):
         try:
             logger.info('Generating ordered arrangement of names...')
-            ##will return an ordered arrangement of names
-            return holder
+            input = data['Common Name'].tolist()
+            perm = list(itertools.permutations(input, r=length))
+            for element in perm:
+                print(element)
+            #
         #
         except:
             print('Not generating ordered arrangement of names.')
