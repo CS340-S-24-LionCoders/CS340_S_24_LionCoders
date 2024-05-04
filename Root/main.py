@@ -122,7 +122,8 @@ def main():
                 scientificCategory.generatePermutationsOfNames(scientificCategory.dataframeCSV)
             #
             elif finding == 3:
-                scientificCategory.generateCombinationsOfNames(scientificCategory.dataframeCSV)
+                findThis = int(input("Enter a number for how many you want to see: "))
+                scientificCategory.generateCombinationsOfNames(scientificCategory.dataframeCSV, findThis,"Common Name", "Root\Output\generateCombinationsOfNames")
             #
         #
         elif userTask == 5: # works
